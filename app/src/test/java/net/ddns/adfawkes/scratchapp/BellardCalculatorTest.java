@@ -4,8 +4,8 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class BellardPiCalculatorUnitTest {
-    private static final IPiCalculator calculator = new BellardPiCalculator();
+public class BellardCalculatorTest {
+    private static final IPiCalculator calculator = new BellardCalculator();
 
     @Test
     public void calculateTo_isCorrectTo1() throws Exception {

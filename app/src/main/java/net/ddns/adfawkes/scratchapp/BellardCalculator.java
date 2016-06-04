@@ -29,7 +29,7 @@ import java.math.RoundingMode;
  * Wikipedia has this as 40% faster than Bailey–Borwein–Plouffe, but unlike BBP
  * it is not able to calculate digits independently of previous digits.
  */
-public class BellardPiCalculator implements IPiCalculator {
+public class BellardCalculator implements IPiCalculator {
     private MathContext context = MathContext.DECIMAL128;
 
     @Override
