@@ -5,7 +5,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class BellardPiCalculatorUnitTest {
-    private IPiCalculator calculator = new BellardPiCalculator();
+    private static final IPiCalculator calculator = new BellardPiCalculator();
 
     @Test
     public void calculateTo_isCorrectTo1() throws Exception {

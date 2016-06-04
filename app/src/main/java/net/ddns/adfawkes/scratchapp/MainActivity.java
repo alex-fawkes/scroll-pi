@@ -12,14 +12,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+
         View view = findViewById(R.id.textView);
         if (view instanceof TextView) {
+            BigDecimal pi = new BellardPiCalculator().calculateTo(10000);
+
             TextView text = (TextView) view;
             text.setMovementMethod(new ScrollingMovementMethod());
-
-            BigDecimal pi = new BellardPiCalculator().calculateTo(3000);
-
             text.setText(pi.toPlainString());
         }
     }

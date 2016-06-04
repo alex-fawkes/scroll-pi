@@ -2,7 +2,7 @@ package net.ddns.adfawkes.scratchapp;
 
 import java.math.BigDecimal;
 
-public interface IPiCalculator {
+interface IPiCalculator {
     BigDecimal calculateTo(int digits);
 
     BigDecimal calculateFrom(int n, int digits);
