@@ -45,60 +45,59 @@ public class BellardPiCalculator implements IPiCalculator {
 
     @Override
     public BigDecimal calculateFrom(int n, int digits) {
-        BigDecimal preceding = invert(big(10).pow(digits - 1));
-        return mod(calculateTo(n + digits), preceding);
+        return mod(calculateTo(n + digits), mask(n));
     }
 
     @Override
     public BigDecimal calculateDigitsFrom(int n, int digits) {
-        BigDecimal scale = big(10).pow(2 * digits - 1);
+        BigDecimal scale = big(10).pow(n + digits - 1);
         return calculateFrom(n, digits).multiply(scale).stripTrailingZeros();
     }
 
-    public BigDecimal calculateScale() {
+    private BigDecimal calculateScale() {
         return big(1).divide(big(2).pow(6), context);
     }
 
-    public BigDecimal calculateLeft(int n) {
+    private BigDecimal calculateLeft(int n) {
         return big(1).negate().pow(n).divide(big(2).pow(10).pow(n), context);
     }
 
-    public BigDecimal calculateRight(BigDecimal n) {
+    private BigDecimal calculateRight(BigDecimal n) {
         return calculateRight6(n).add(
                 calculateRight5(n).add(calculateRight4(n).add(
                         calculateRight3(n).add(calculateRight2(n).add(
                                 calculateRight1(n).add(calculateRight0(n)))))));
     }
 
-    public BigDecimal calculateRight0(BigDecimal n) {
+    private BigDecimal calculateRight0(BigDecimal n) {
         return big(2).pow(5).divide(big(4).multiply(n).add(big(1)), context).negate();
     }
 
-    public BigDecimal calculateRight1(BigDecimal n) {
+    private BigDecimal calculateRight1(BigDecimal n) {
         return big(1).divide(big(4).multiply(n).add(big(3)), context).negate();
     }
 
-    public BigDecimal calculateRight2(BigDecimal n) {
+    private BigDecimal calculateRight2(BigDecimal n) {
         return big(2).pow(8).divide(big(10).multiply(n).add(big(1)), context);
     }
 
-    public BigDecimal calculateRight3(BigDecimal n) {
+    private BigDecimal calculateRight3(BigDecimal n) {
         return big(2).pow(6).divide(big(10).multiply(n).add(big(3)), context).negate();
     }
 
-    public BigDecimal calculateRight4(BigDecimal n) {
+    private BigDecimal calculateRight4(BigDecimal n) {
         return big(2).pow(2).divide(big(10).multiply(n).add(big(5)), context).negate();
     }
 
-    public BigDecimal calculateRight5(BigDecimal n) {
+    private BigDecimal calculateRight5(BigDecimal n) {
         return big(2).pow(2).divide(big(10).multiply(n).add(big(7)), context).negate();
     }
 
-    public BigDecimal calculateRight6(BigDecimal n) {
+    private BigDecimal calculateRight6(BigDecimal n) {
         return big(1).divide(big(10).multiply(n).add(big(9)), context);
     }
 
-    public BigDecimal calculateAddend(int n) {
+    private BigDecimal calculateAddend(int n) {
         return calculateLeft(n).multiply(calculateRight(big(n)));
     }
 
@@ -117,6 +116,11 @@ public class BellardPiCalculator implements IPiCalculator {
     private BigDecimal round(BigDecimal n, int digits) {
         if (digits < 1) return n;
         return n.setScale(digits - 1, RoundingMode.DOWN);
+    }
+
+    private BigDecimal mask(int digits) {
+        if (digits < 1) return big(10);
+        return invert(big(10).pow(digits - 1));
     }
 
     private void adjustPrecision(int digits) {

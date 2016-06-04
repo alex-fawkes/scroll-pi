@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
             BigDecimal pi = new BellardPiCalculator().calculateTo(3000);
 
-            text.setText(pi.toString());
+            text.setText(pi.toPlainString());
         }
     }
 }
