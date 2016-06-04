@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
             TextView text = (TextView) view;
             text.setMovementMethod(new ScrollingMovementMethod());
 
-            BigDecimal pi = new PiCalculator().calculateTo(3000);
+            BigDecimal pi = new BellardPiCalculator().calculateTo(3000);
 
             text.setText(pi.toString());
         }

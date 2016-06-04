@@ -6,7 +6,7 @@ import java.math.RoundingMode;
 
 /**
  * Calculates pi to an arbitrary number of digits using Bellard's formula:
- * <p/>
+ *
  * <pre>
  * scale = 1 / 2^6
  * left(n) = (-1)^n / 2^(10n)
@@ -25,18 +25,34 @@ import java.math.RoundingMode;
  *
  * bellard(n) = scale * sigma(0, n, addend(n))
  * </pre>
+ *
+ * Wikipedia has this as 40% faster than Bailey–Borwein–Plouffe, but unlike BBP
+ * it is not able to calculate digits independently of previous digits.
  */
-public class PiCalculator {
+public class BellardPiCalculator implements IPiCalculator {
     private MathContext context = MathContext.DECIMAL128;
 
+    @Override
     public BigDecimal calculateTo(int digits) {
         adjustPrecision(digits);
 
         BigDecimal pi = big(0);
-        for (int i = 0; i < digits; ++i) {
-            pi = pi.add(calculateAddend(i));
+        for (int n = 0; n < digits; ++n) {
+            pi = pi.add(calculateAddend(n));
         }
         return round(pi.multiply(calculateScale()), digits);
+    }
+
+    @Override
+    public BigDecimal calculateFrom(int n, int digits) {
+        BigDecimal preceding = invert(big(10).pow(digits - 1));
+        return mod(calculateTo(n + digits), preceding);
+    }
+
+    @Override
+    public BigDecimal calculateDigitsFrom(int n, int digits) {
+        BigDecimal scale = big(10).pow(2 * digits - 1);
+        return calculateFrom(n, digits).multiply(scale).stripTrailingZeros();
     }
 
     public BigDecimal calculateScale() {
@@ -88,6 +104,14 @@ public class PiCalculator {
 
     private BigDecimal big(int n) {
         return new BigDecimal(n);
+    }
+
+    private BigDecimal mod(BigDecimal n, BigDecimal divisor) {
+        return n.divideAndRemainder(divisor, context)[1];
+    }
+
+    private BigDecimal invert(BigDecimal n) {
+        return big(1).divide(n, context);
     }
 
     private BigDecimal round(BigDecimal n, int digits) {
