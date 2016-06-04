@@ -1,8 +1,8 @@
-#include "bpp.hpp"
+#include "bbp.hpp"
 
 namespace scratchapp {
     namespace picalc {
-        namespace bpp {
+        namespace bbp {
             std::string calculate_to(int digits) {
                 (void) digits;
                 return "3.14159265358979323846264338327950288419716939937510";

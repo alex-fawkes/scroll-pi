@@ -1,8 +1,10 @@
-#include "picalc/bpp.hpp"
+#include "picalc/bbp.hpp"
 
 #include <jni.h>
 
-using namespace scratchapp::picalc::bpp;
+// TODO: match c++ namespacing to java package structure
+// TODO: save c++ in cpp directory like java
+using namespace scratchapp::picalc::bbp;
 
 static jstring to_jstring(JNIEnv* environment, const std::string& str) {
     return environment->NewStringUTF(str.c_str());
@@ -10,19 +12,19 @@ static jstring to_jstring(JNIEnv* environment, const std::string& str) {
 
 extern "C" {
     JNIEXPORT jstring JNICALL
-    Java_net_ddns_adfawkes_scratchapp_NativeBppCalc_calculateTo(
+    Java_net_ddns_adfawkes_scratchapp_NativeBbpCalc_calculateTo(
             JNIEnv* environment, jclass, int digits) {
         return to_jstring(environment, calculate_to(digits));
     }
 
     JNIEXPORT jstring JNICALL
-    Java_net_ddns_adfawkes_scratchapp_NativeBppCalc_calculateFrom(
+    Java_net_ddns_adfawkes_scratchapp_NativeBbpCalc_calculateFrom(
             JNIEnv* environment, jclass, int n, int digits) {
         return to_jstring(environment, calculate_from(n, digits));
     }
 
     JNIEXPORT jstring JNICALL
-    Java_net_ddns_adfawkes_scratchapp_NativeBppCalc_calculateDigitsFrom(
+    Java_net_ddns_adfawkes_scratchapp_NativeBbpCalc_calculateDigitsFrom(
             JNIEnv* environment, jclass, int n, int digits) {
         return to_jstring(environment, calculate_digits_from(n, digits));
     }

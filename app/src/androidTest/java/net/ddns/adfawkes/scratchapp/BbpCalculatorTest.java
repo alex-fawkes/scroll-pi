@@ -7,14 +7,14 @@ import android.test.suitebuilder.annotation.MediumTest;
 /**
  * This is an application test rather than unit test because we need native library access.
  */
-public class BppCalculatorTest extends ApplicationTestCase<Application> {
+public class BbpCalculatorTest extends ApplicationTestCase<Application> {
     // TODO: Deduplicate this against BellardPiCalculatorUnitTest.
 
-    public BppCalculatorTest() {
+    public BbpCalculatorTest() {
         super(Application.class);
     }
 
-    private static final IPiCalculator calculator = new BppCalculator();
+    private static final IPiCalculator calculator = new BbpCalculator();
 
     @MediumTest
     public void testCalculateTo_isCorrectTo1() throws Exception {
