@@ -14,9 +14,10 @@ model {
         }
 
         ndk {
-            moduleName 'hello'
+            moduleName 'scratchapp'
             toolchain = 'clang'
             CFlags.addAll(['-Wall'])
+            stl "stlport_shared"
         }
 
         buildTypes {

@@ -17,13 +17,11 @@ public class MainActivity extends AppCompatActivity {
         if (view instanceof TextView) {
             TextView text = (TextView) view;
             text.setMovementMethod(new ScrollingMovementMethod());
-            text.setText(stringFromJNI2());
+            text.setText(new BppPiCalculator().calculateTo(50).toPlainString());
         }
     }
 
-    public native String stringFromJNI2();
-
     static {
-        System.loadLibrary("hello");
+        System.loadLibrary("picalc");
     }
 }
