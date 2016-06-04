@@ -5,9 +5,13 @@
       <w>bellard</w>
       <w>borwein</w>
       <w>ddns</w>
+      <w>googletest</w>
+      <w>libpicalc</w>
+      <w>libstlport</w>
       <w>picalc</w>
       <w>plouffe</w>
       <w>scratchapp</w>
+      <w>stlport</w>
     </words>
   </dictionary>
 </component>

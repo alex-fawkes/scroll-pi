@@ -17,7 +17,7 @@ model {
             moduleName 'scratchapp'
             toolchain = 'clang'
             CFlags.addAll(['-Wall'])
-            stl "stlport_shared"
+            stl "stlport_static"
         }
 
         buildTypes {
