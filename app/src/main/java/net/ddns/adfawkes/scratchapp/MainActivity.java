@@ -6,8 +6,6 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.TextView;
 
-import java.math.BigDecimal;
-
 public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,11 +15,15 @@ public class MainActivity extends AppCompatActivity {
 
         View view = findViewById(R.id.textView);
         if (view instanceof TextView) {
-            BigDecimal pi = new BellardPiCalculator().calculateTo(10000);
-
             TextView text = (TextView) view;
             text.setMovementMethod(new ScrollingMovementMethod());
-            text.setText(pi.toPlainString());
+            text.setText(stringFromJNI2());
         }
+    }
+
+    public native String stringFromJNI2();
+
+    static {
+        System.loadLibrary("hello");
     }
 }
