@@ -8,8 +8,7 @@ static jstring to_jstring(JNIEnv* environment, const std::string& str) {
     return environment->NewStringUTF(str.c_str());
 }
 
-extern "C"
-{
+extern "C" {
     JNIEXPORT jstring JNICALL
     Java_net_ddns_adfawkes_scratchapp_NativeBppCalc_calculateTo(
             JNIEnv* environment, jclass, int digits) {
