@@ -1,9 +1,12 @@
-**/libs
-**/obj
-/build
+build/
+libs/
+obj/
 
-/.idea/libraries
-/.idea/workspace.xml
+.idea/libraries/
+.idea/shelf/
+.idea/workspace.xml
 
-/local.properties
-.gradle
+.google/
+.gradle/
+local.properties
+app.iml

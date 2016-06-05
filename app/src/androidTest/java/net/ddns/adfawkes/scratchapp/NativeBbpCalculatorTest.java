@@ -10,7 +10,7 @@ import android.test.suitebuilder.annotation.MediumTest;
 public class NativeBbpCalculatorTest extends ApplicationTestCase<Application> {
     private static final IPiCalculator calculator = new NativeBbpCalculator();
 
-    // TODO: deduplicate this against BellardPiCalculatorUnitTest
+    // TODO: deduplicate this against IPiCalculatorTest
     // TODO: rename this project something other than scratchapp
     public NativeBbpCalculatorTest() {
         super(Application.class);
@@ -42,7 +42,6 @@ public class NativeBbpCalculatorTest extends ApplicationTestCase<Application> {
         assertEquals("3.14", calculator.calculateFrom(0, 3).toPlainString());
     }
 
-    // TODO: copy these to unit tests, also dedupe
     @MediumTest
     public void testCalculateFrom_isCorrect3From1() throws Exception {
         assertEquals("0.141", calculator.calculateFrom(1, 3).toPlainString());
