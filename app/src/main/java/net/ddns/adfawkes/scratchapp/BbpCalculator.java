@@ -9,6 +9,8 @@ import java.math.RoundingMode;
  * Implementation of Bailey–Borwein–Plouffe formula for calculating pi to
  * an arbitrary number of digits. BBP is a spigot algorithm, meaning it
  * can calculate any digit of pi without calculating preceding digits.
+ * However, this is not the spigot version of the algorithm, but rather
+ * a basic test implementation.
  */
 // TODO: deduplicate versus bellard, native bbp
 // TODO: general cleanup
@@ -23,7 +25,6 @@ public class BbpCalculator implements IPiCalculator {
 
     @Override
     public BigDecimal calculateFrom(int n, int digits) {
-        // TODO: make spigot
         return round(pi(n + digits).subtract(pi(n)), n + digits);
     }
 

@@ -55,7 +55,6 @@ public class MainActivity extends Activity {
 
     }
 
-    // TODO: final locals, members
     private class Append implements Runnable {
         private final TextView view;
         private final String text;
