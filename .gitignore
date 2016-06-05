@@ -4,6 +4,7 @@ obj/
 
 .idea/libraries/
 .idea/shelf/
+.idea/misc.xml
 .idea/workspace.xml
 
 .google/
