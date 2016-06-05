@@ -8,8 +8,14 @@ import java.math.RoundingMode;
  * Calculates pi to an arbitrary number of digits using Bellard's formula:
  * <p/>
  * <pre>
+ * pi = scale * sigma(n = 0, inf, addend(n))
+ *
  * scale = 1 / 2^6
+ * addend(n) = left(n) + right(n)
+ *
  * left(n) = (-1)^n / 2^(10n)
+ *
+ * right(n) = right0(n) + right1(n) + ... + right6(n)
  *
  * right0(n) = -2^5 / ( 4n + 1)
  * right1(n) = -1   / ( 4n + 3)
@@ -18,12 +24,6 @@ import java.math.RoundingMode;
  * right4(n) = -2^2 / (10n + 5)
  * right5(n) = -2^2 / (10n + 7)
  * right6(n) =  1   / (10n + 9)
- *
- * right(n) = right0(n) + right1(n) + ... + right6(n)
- *
- * addend(n) = left(n) + right(n)
- *
- * bellard(n) = scale * sigma(0, n, addend(n))
  * </pre>
  * <p/>
  * Wikipedia has this as 40% faster than Bailey–Borwein–Plouffe, but unlike BBP

@@ -7,14 +7,14 @@ import android.test.suitebuilder.annotation.MediumTest;
 /**
  * This is an application test rather than unit test because we need native library access.
  */
-public class BbpCalculatorTest extends ApplicationTestCase<Application> {
-    // TODO: Deduplicate this against BellardPiCalculatorUnitTest.
-
-    public BbpCalculatorTest() {
+public class NativeBbpCalculatorTest extends ApplicationTestCase<Application> {
+    // TODO: deduplicate this against BellardPiCalculatorUnitTest
+    // TODO: rename this project something other than scratchapp
+    public NativeBbpCalculatorTest() {
         super(Application.class);
     }
 
-    private static final IPiCalculator calculator = new BbpCalculator();
+    private static final IPiCalculator calculator = new NativeBbpCalculator();
 
     @MediumTest
     public void testCalculateTo_isCorrectTo1() throws Exception {
@@ -40,6 +40,17 @@ public class BbpCalculatorTest extends ApplicationTestCase<Application> {
     @MediumTest
     public void testCalculateFrom_isCorrect3From0() throws Exception {
         assertEquals("3.14", calculator.calculateFrom(0, 3).toPlainString());
+    }
+
+    // TODO: copy these to unit tests, also dedupe
+    @MediumTest
+    public void testCalculateFrom_isCorrect3From1() throws Exception {
+        assertEquals("0.141", calculator.calculateFrom(1, 3).toPlainString());
+    }
+
+    @MediumTest
+    public void testCalculateFrom_isCorrect3From2() throws Exception {
+        assertEquals("0.0415", calculator.calculateFrom(2, 3).toPlainString());
     }
 
     @MediumTest

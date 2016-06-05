@@ -1,11 +1,27 @@
 package net.ddns.adfawkes.scratchapp;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
+
+import java.util.Arrays;
+import java.util.Collection;
 
 import static org.junit.Assert.assertEquals;
 
-public class BellardCalculatorTest {
-    private static final IPiCalculator calculator = new BellardCalculator();
+@RunWith(Parameterized.class)
+public class IPiCalculatorTest {
+    private IPiCalculator calculator;
+
+    public IPiCalculatorTest(Class cls) throws InstantiationException, IllegalAccessException {
+        calculator = (IPiCalculator)cls.newInstance();
+    }
+
+    @Parameters
+    public static Collection getClassesToTest() {
+        return Arrays.asList(BellardCalculator.class, BbpCalculator.class);
+    }
 
     @Test
     public void calculateTo_isCorrectTo1() throws Exception {

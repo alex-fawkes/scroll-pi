@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         if (view instanceof TextView) {
             TextView text = (TextView) view;
             text.setMovementMethod(new ScrollingMovementMethod());
-            text.setText(new BbpCalculator().calculateTo(50).toPlainString());
+            text.setText(new NativeBbpCalculator().calculateTo(10000).toPlainString());
         }
     }
 

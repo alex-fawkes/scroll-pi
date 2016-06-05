@@ -1,7 +1,7 @@
 package net.ddns.adfawkes.scratchapp;
 
-final class NativeBbpCalc {
-    private NativeBbpCalc() {}
+final class NativeBbp {
+    private NativeBbp() {}
 
     public static native String calculateTo(int digits);
     public static native String calculateFrom(int n, int digits);
