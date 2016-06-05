@@ -7,7 +7,10 @@ import java.util.List;
 /**
  * Shortcuts for quick extension methods with no heavy dependencies.
  */
+@SuppressWarnings({"WeakerAccess", "SameParameterValue"})
 public final class X {
+    private static final DoubleToSingle DOUBLE_TO_SINGLE = new DoubleToSingle();
+
     private X() {
     }
 
@@ -47,7 +50,7 @@ public final class X {
 
     public static String join(final List<String> strings, final String separator) {
         final StringBuilder builder = new StringBuilder();
-        for (String s : strings ) {
+        for (String s : strings) {
             builder.append(s);
             if (!last(strings, s)) {
                 builder.append(separator);
@@ -63,8 +66,6 @@ public final class X {
         }
         return mapped;
     }
-
-    private static final Function.Return1<String, String> DOUBLE_TO_SINGLE = new DoubleToSingle();
 
     private static class DoubleToSingle implements Function.Return1<String, String> {
         @Override

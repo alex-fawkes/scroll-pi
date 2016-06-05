@@ -1,7 +1,9 @@
 package net.ddns.adfawkes.scratchapp.extensions;
 
 // TODO: remove "I" prefix from interfaces
-public final class Function {
+
+@SuppressWarnings("unused")
+final class Function {
     private Function() {
     }
 

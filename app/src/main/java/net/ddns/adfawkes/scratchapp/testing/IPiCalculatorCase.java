@@ -5,6 +5,6 @@ import net.ddns.adfawkes.scratchapp.IPiCalculator;
 /**
  * Test case for IPiCalculator implementations.
  */
-public interface IPiCalculatorCase {
+interface IPiCalculatorCase {
     void test(IPiCalculator calculator) throws CaseFailedException;
 }

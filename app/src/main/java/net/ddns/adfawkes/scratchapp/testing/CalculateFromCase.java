@@ -1,7 +1,7 @@
 package net.ddns.adfawkes.scratchapp.testing;
 
-import net.ddns.adfawkes.scratchapp.extensions.X;
 import net.ddns.adfawkes.scratchapp.IPiCalculator;
+import net.ddns.adfawkes.scratchapp.extensions.X;
 
 public class CalculateFromCase extends PiCalculatorCase {
     private final int n;
@@ -13,11 +13,11 @@ public class CalculateFromCase extends PiCalculatorCase {
         this.digits = digits;
     }
 
-    public String calculate(IPiCalculator calculator) {
-        return calculator.calculateFrom(n, digits).toPlainString();
-    }
-
     private static String getDescription(int n, int digits) {
         return "CalculateFrom.isCorrect(" + X.str(n) + ", " + X.str(digits) + ")";
+    }
+
+    public String calculate(IPiCalculator calculator) {
+        return calculator.calculateFrom(n, digits).toPlainString();
     }
 }

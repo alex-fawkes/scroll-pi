@@ -6,12 +6,12 @@ public abstract class PiCalculatorCase implements IPiCalculatorCase {
     private final String description;
     private final String expected;
 
-    public PiCalculatorCase(String description, String expected) {
+    PiCalculatorCase(String description, String expected) {
         this.description = description;
         this.expected = expected;
     }
 
-    public abstract String calculate(IPiCalculator calculator);
+    protected abstract String calculate(IPiCalculator calculator);
 
     public void test(IPiCalculator calculator) throws CaseFailedException {
         final String actual = calculate(calculator);

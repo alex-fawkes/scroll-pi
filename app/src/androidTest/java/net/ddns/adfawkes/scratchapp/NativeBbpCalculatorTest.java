@@ -18,12 +18,12 @@ public class NativeBbpCalculatorTest extends ApplicationTestCase<Application> {
         super(Application.class);
     }
 
+    private static PiCalculatorRunner getRunner() {
+        return new PiCalculatorRunner(new NativeBbpCalculator());
+    }
+
     @MediumTest
     public void testAllCases() throws Exception {
         runner.run(PiCalculatorCaseSet.getAllCases());
-    }
-
-    private static PiCalculatorRunner getRunner() {
-        return new PiCalculatorRunner(new NativeBbpCalculator());
     }
 }

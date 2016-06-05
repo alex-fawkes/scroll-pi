@@ -14,7 +14,7 @@ public abstract class PiCalculatorTest {
         runner = new PiCalculatorRunner(getCalculator());
     }
 
-    public abstract IPiCalculator getCalculator();
+    protected abstract IPiCalculator getCalculator();
 
     @Test
     public void testAllCases() throws Exception {

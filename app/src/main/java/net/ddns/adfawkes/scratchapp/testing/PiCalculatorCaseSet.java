@@ -22,6 +22,9 @@ public final class PiCalculatorCaseSet {
     }
 
     public static final class CalculateTo {
+        private CalculateTo() {
+        }
+
         public static Collection<IPiCalculatorCase> getAllCases() {
             final Collection<IPiCalculatorCase> cases = new ArrayList<>();
             cases.add(getIsCorrectTo1());
@@ -30,9 +33,6 @@ public final class PiCalculatorCaseSet {
             cases.add(getIsCorrectTo25());
             cases.add(getIsCorrectTo50());
             return cases;
-        }
-
-        private CalculateTo () {
         }
 
         private static IPiCalculatorCase getIsCorrectTo1() {
@@ -61,6 +61,9 @@ public final class PiCalculatorCaseSet {
     }
 
     public static final class CalculateFrom {
+        private CalculateFrom() {
+        }
+
         public static Collection<IPiCalculatorCase> getAllCases() {
             final Collection<IPiCalculatorCase> cases = new ArrayList<>();
             cases.add(getIsCorrect3From0());
@@ -69,9 +72,6 @@ public final class PiCalculatorCaseSet {
             cases.add(getIsCorrect25From0());
             cases.add(getIsCorrect25From25());
             return cases;
-        }
-
-        private CalculateFrom() {
         }
 
         private static IPiCalculatorCase getIsCorrect3From0() {
@@ -100,6 +100,9 @@ public final class PiCalculatorCaseSet {
     }
 
     public static final class CalculateDigitsFrom {
+        private CalculateDigitsFrom() {
+        }
+
         private static Collection<IPiCalculatorCase> getAllCases() {
             final Collection<IPiCalculatorCase> cases = new ArrayList<>();
             cases.add(getIsCorrect3From0());
@@ -108,9 +111,6 @@ public final class PiCalculatorCaseSet {
             cases.add(getIsCorrect25From0());
             cases.add(getIsCorrect25From25());
             return cases;
-        }
-
-        private CalculateDigitsFrom() {
         }
 
         private static IPiCalculatorCase getIsCorrect3From0() {

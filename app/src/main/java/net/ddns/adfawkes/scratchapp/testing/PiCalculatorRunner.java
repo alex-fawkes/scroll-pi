@@ -23,8 +23,7 @@ public class PiCalculatorRunner {
         for (IPiCalculatorCase c : cases) {
             try {
                 c.test(calculator);
-            }
-            catch (CaseFailedException e) {
+            } catch (CaseFailedException e) {
                 exceptions.add(e);
             }
         }
