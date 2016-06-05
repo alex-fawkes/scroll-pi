@@ -10,6 +10,7 @@ public class NativeBbpCalculator implements IPiCalculator {
         return new BigDecimal(NativeBbp.calculateTo(digits));
     }
 
+    // TODO: "n" should be "index"
     public BigDecimal calculateFrom(int n, int digits) {
         return new BigDecimal(NativeBbp.calculateFrom(n, digits));
     }

@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import net.ddns.adfawkes.scratchapp.extensions.X;
+
 import java.util.Random;
 
 public class MainActivity extends Activity {
@@ -27,7 +29,7 @@ public class MainActivity extends Activity {
 
             StringBuilder text = new StringBuilder();
             for (int i = 0; i < 100; ++i) {
-                text.append(String.valueOf(random.nextInt(10)));
+                text.append(X.str(random.nextInt(10)));
             }
             view.post(new Append((TextView) view, text.toString()));
         }

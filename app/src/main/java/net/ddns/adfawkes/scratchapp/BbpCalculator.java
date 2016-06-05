@@ -34,7 +34,9 @@ public class BbpCalculator implements IPiCalculator {
 
     private BigDecimal pi(int n) {
         BigDecimal pi = big(0);
-        for (int i = 0; i < n; ++i) pi = pi.add(addend(big(i)));
+        for (int i = 0; i < n; ++i) {
+            pi = pi.add(addend(big(i)));
+        }
         return round(pi, n);
     }
 

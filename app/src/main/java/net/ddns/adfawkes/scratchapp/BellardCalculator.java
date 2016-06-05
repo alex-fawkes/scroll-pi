@@ -37,8 +37,8 @@ public class BellardCalculator implements IPiCalculator {
         adjustPrecision(digits);
 
         BigDecimal pi = big(0);
-        for (int n = 0; n < digits; ++n) {
-            pi = pi.add(calculateAddend(n));
+        for (int i = 0; i < digits; ++i) {
+            pi = pi.add(calculateAddend(i));
         }
         return round(pi.multiply(calculateScale()), digits);
     }
