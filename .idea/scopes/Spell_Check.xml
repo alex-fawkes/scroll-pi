@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Spell Check" pattern="!file:src/main/obj//*&amp;&amp;!file:build//*" />
+</component>

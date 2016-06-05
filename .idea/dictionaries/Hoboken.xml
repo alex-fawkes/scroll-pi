@@ -2,9 +2,14 @@
   <dictionary name="Hoboken">
     <words>
       <w>adfawkes</w>
+      <w>appname</w>
       <w>bellard</w>
       <w>borwein</w>
       <w>ddns</w>
+      <w>dedupe</w>
+      <w>dorg</w>
+      <w>endlocal</w>
+      <w>errorlevel</w>
       <w>fmod</w>
       <w>libpicalc</w>
       <w>libstlport</w>
@@ -12,6 +17,7 @@
       <w>plouffe</w>
       <w>pretrunc</w>
       <w>scratchapp</w>
+      <w>setlocal</w>
       <w>stlport</w>
       <w>trunc</w>
     </words>

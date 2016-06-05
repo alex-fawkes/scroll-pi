@@ -8,6 +8,10 @@ import android.widget.TextView;
 import java.util.Random;
 
 public class MainActivity extends Activity {
+    static {
+        System.loadLibrary("picalc");
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -15,13 +19,26 @@ public class MainActivity extends Activity {
         new Thread(new Loop()).start();
     }
 
+    private void displayRandom() {
+        View view = findViewById(R.id.textView);
+        if (view instanceof TextView) {
+            // avoid threading issues entirely with local random instance
+            Random random = new Random();
+
+            StringBuilder text = new StringBuilder();
+            for (int i = 0; i < 100; ++i) {
+                text.append(String.valueOf(random.nextInt(10)));
+            }
+            view.post(new Append((TextView) view, text.toString()));
+        }
+    }
+
     private class Loop implements Runnable {
         @Override
         public void run() {
             try {
                 loop();
-            }
-            catch (InterruptedException e) {
+            } catch (InterruptedException e) {
                 // stop
             }
         }
@@ -61,23 +78,5 @@ public class MainActivity extends Activity {
                 view.setText(current.subSequence(begin, length));
             }
         }
-    }
-
-    void displayRandom() {
-        View view = findViewById(R.id.textView);
-        if (view instanceof TextView) {
-            // avoid threading issues entirely with local random instance
-            Random random = new Random();
-
-            StringBuilder text = new StringBuilder();
-            for (int i = 0; i < 100; ++i) {
-                text.append(String.valueOf(random.nextInt(10)));
-            }
-            view.post(new Append((TextView) view, text.toString()));
-        }
-    }
-
-    static {
-        System.loadLibrary("picalc");
     }
 }

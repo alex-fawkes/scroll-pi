@@ -21,21 +21,31 @@ namespace scratchapp {
         //      right3(n) = -1 / (8n + 6)
         //
         // TODO: move dox to header, make class
+        // TODO: make this the spigot form of the algorithm
         namespace bbp {
             static double pi(int n);
+
             static double addend(double n);
+
             static double left(double n);
+
             static double right(double n);
+
             static double right0(double n);
+
             static double right1(double n);
+
             static double right2(double n);
+
             static double right3(double n);
+
             static std::string string(double d, int digits);
 
             double trunc(double d, int n) {
                 const double tens(std::pow(10.0, n - 1));
                 return static_cast<double>(static_cast<int>(d * tens)) / tens;
             }
+
             // TODO: +1, -1 in (pre)trunc supposed to be?
             double pretrunc(double d, int n) {
                 return std::fmod(d, std::pow(10.0, 1 - n));
@@ -56,7 +66,8 @@ namespace scratchapp {
 
             std::string calculate_digits_from(int n, int digits) {
                 // TODO: functional pow?
-                return string(calculate_to_double(n, digits) * std::pow(10.0, n + digits - 1), digits);
+                return string(calculate_to_double(n, digits) * std::pow(10.0, n + digits - 1),
+                              digits);
             }
 
             double pi(int n) {

@@ -8,13 +8,13 @@ import android.test.suitebuilder.annotation.MediumTest;
  * This is an application test rather than unit test because we need native library access.
  */
 public class NativeBbpCalculatorTest extends ApplicationTestCase<Application> {
+    private static final IPiCalculator calculator = new NativeBbpCalculator();
+
     // TODO: deduplicate this against BellardPiCalculatorUnitTest
     // TODO: rename this project something other than scratchapp
     public NativeBbpCalculatorTest() {
         super(Application.class);
     }
-
-    private static final IPiCalculator calculator = new NativeBbpCalculator();
 
     @MediumTest
     public void testCalculateTo_isCorrectTo1() throws Exception {

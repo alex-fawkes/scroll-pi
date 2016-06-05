@@ -7,7 +7,9 @@ namespace scratchapp {
     namespace picalc {
         namespace bbp {
             std::string calculate_to(int digits);
+
             std::string calculate_from(int n, int digits);
+
             std::string calculate_digits_from(int n, int digits);
         }
     }

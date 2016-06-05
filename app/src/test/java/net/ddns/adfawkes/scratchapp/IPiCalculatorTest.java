@@ -15,7 +15,7 @@ public class IPiCalculatorTest {
     private IPiCalculator calculator;
 
     public IPiCalculatorTest(Class cls) throws InstantiationException, IllegalAccessException {
-        calculator = (IPiCalculator)cls.newInstance();
+        calculator = (IPiCalculator) cls.newInstance();
     }
 
     @Parameters
