@@ -1,6 +1,6 @@
 package com.gmail.fawkes.alex.scrollpi.math.testing;
 
-import com.gmail.fawkes.alex.scrollpi.utilities.U;
+import static com.gmail.fawkes.alex.scrollpi.utilities.Utilities.quote;
 
 class CaseFailedException extends Exception {
     public CaseFailedException(
@@ -10,7 +10,7 @@ class CaseFailedException extends Exception {
 
     private static String toJson(
             final String description, final String expected, final String actual) {
-        final String format = U.quote("{ 'description': '%s', 'expected': %s, 'actual': %s }");
+        final String format = quote("{ 'description': '%s', 'expected': %s, 'actual': %s }");
         return String.format(format, description, expected, actual);
     }
 

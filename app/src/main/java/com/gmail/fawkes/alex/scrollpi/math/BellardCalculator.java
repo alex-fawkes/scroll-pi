@@ -114,12 +114,16 @@ public class BellardCalculator implements PiCalculator {
     }
 
     private BigDecimal round(final BigDecimal n, final int digits) {
-        if (digits < 1) return n;
+        if (digits < 1) {
+            return n;
+        }
         return n.setScale(digits - 1, RoundingMode.DOWN);
     }
 
     private BigDecimal mask(final int digits) {
-        if (digits < 1) return big(10);
+        if (digits < 1) {
+            return big(10);
+        }
         return invert(big(10).pow(digits - 1));
     }
 

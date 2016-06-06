@@ -5,9 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.gmail.fawkes.alex.scrollpi.utilities.U;
-
 import java.util.Random;
+
+import static com.gmail.fawkes.alex.scrollpi.utilities.Utilities.string;
 
 public class ScrollPiActivity extends Activity {
     private static final Random random = new Random();
@@ -31,7 +31,7 @@ public class ScrollPiActivity extends Activity {
         final StringBuilder text = new StringBuilder();
         for (int i = 0; i < 100; ++i) {
             final int digit = random.nextInt(10);
-            text.append(U.string(digit));
+            text.append(string(digit));
         }
         return text.toString();
     }

@@ -1,7 +1,8 @@
 package com.gmail.fawkes.alex.scrollpi.math.testing;
 
 import com.gmail.fawkes.alex.scrollpi.math.PiCalculator;
-import com.gmail.fawkes.alex.scrollpi.utilities.U;
+
+import static com.gmail.fawkes.alex.scrollpi.utilities.Utilities.string;
 
 public class CalculateToCase extends EqualityCase {
     private final int n;
@@ -12,7 +13,7 @@ public class CalculateToCase extends EqualityCase {
     }
 
     private static String getDescription(int n) {
-        return "CalculateTo.isCorrect(" + U.string(n) + ")";
+        return "CalculateTo.isCorrect(" + string(n) + ")";
     }
 
     public String calculate(final PiCalculator calculator) {

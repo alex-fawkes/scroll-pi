@@ -8,10 +8,10 @@ import java.util.List;
  * Shortcut for quick utility methods with no heavy dependencies.
  */
 @SuppressWarnings({"WeakerAccess", "SameParameterValue"}) // exposed for future use
-public final class U {
+public final class Utilities {
     private static final ConvertDoubleQuotes converter = new ConvertDoubleQuotes();
 
-    private U() {
+    private Utilities() {
     }
 
     public static String string(final int n) {

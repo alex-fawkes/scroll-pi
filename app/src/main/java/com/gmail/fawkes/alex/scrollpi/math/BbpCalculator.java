@@ -77,7 +77,6 @@ public class BbpCalculator implements PiCalculator {
         return big(1).divide(n, context);
     }
 
-    // TODO: add if curly braces
     // TODO: use map where appropriate
     private BigDecimal round(final BigDecimal n, final int digits) {
         if (digits < 1) {

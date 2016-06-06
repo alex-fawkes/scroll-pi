@@ -1,9 +1,11 @@
 package com.gmail.fawkes.alex.scrollpi.math.testing;
 
-import com.gmail.fawkes.alex.scrollpi.utilities.U;
-
 import java.util.ArrayList;
 import java.util.List;
+
+
+import static com.gmail.fawkes.alex.scrollpi.utilities.Utilities.first;
+import static com.gmail.fawkes.alex.scrollpi.utilities.Utilities.quote;
 
 /**
  * Thrown when PiCalculatorRunner encounters failed test cases.
@@ -25,9 +27,9 @@ class TestFailedException extends Exception {
         // java json api will not run on android unless we provide
         // the jar; just do without since the use case is simple
         final StringBuilder list = new StringBuilder();
-        list.append(U.quote("{ 'cases': [ "));
+        list.append(quote("{ 'cases': [ "));
         for (final String e : elements) {
-            if (!U.first(elements, e)) {
+            if (!first(elements, e)) {
                 list.append(", ");
             }
             list.append(e);
