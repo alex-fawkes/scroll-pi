@@ -5,9 +5,9 @@ namespace fawkes {
     namespace scrollpi {
         namespace math {
             namespace floating {
-                double trunc(double d, int digits);
+                double trunc(const double d, const int digits);
 
-                double trunc_front(double d, int digits);
+                double trunc_front(const double d, const int digits);
             }
         }
     }

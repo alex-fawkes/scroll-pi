@@ -41,7 +41,7 @@ public class ScrollPiActivity extends Activity {
             }
         }
 
-        @SuppressWarnings("InfiniteLoopStatement")
+        @SuppressWarnings("InfiniteLoopStatement") // threaded infinite pi calculation
         private void loop() throws InterruptedException {
             while (true) {
                 displayRandom();

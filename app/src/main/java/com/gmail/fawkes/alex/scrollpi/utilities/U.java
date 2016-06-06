@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Shortcut for quick utility methods with no heavy dependencies.
  */
-@SuppressWarnings({"WeakerAccess", "SameParameterValue"})
+@SuppressWarnings({"WeakerAccess", "SameParameterValue"}) // exposed for future use
 public final class U {
     private static final DoubleToSingle DOUBLE_TO_SINGLE = new DoubleToSingle();
 

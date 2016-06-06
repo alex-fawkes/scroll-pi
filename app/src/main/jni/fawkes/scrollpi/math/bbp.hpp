@@ -25,7 +25,6 @@ namespace fawkes {
     namespace scrollpi {
         namespace math {
             namespace bbp {
-                // TODO: more const params
                 std::string calculate_to(const int digits);
 
                 std::string calculate_from(const int n, const int digits);
