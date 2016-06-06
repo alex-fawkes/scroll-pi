@@ -10,3 +10,4 @@ obj/
 .google/
 .gradle/
 local.properties
+app.iml
