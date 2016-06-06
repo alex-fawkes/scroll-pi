@@ -33,7 +33,7 @@ public class BellardCalculator implements IPiCalculator {
     private MathContext context = MathContext.DECIMAL128;
 
     @Override
-    public BigDecimal calculateTo(int digits) {
+    public BigDecimal calculateTo(final int digits) {
         adjustPrecision(digits);
 
         BigDecimal pi = big(0);
@@ -44,13 +44,13 @@ public class BellardCalculator implements IPiCalculator {
     }
 
     @Override
-    public BigDecimal calculateFrom(int n, int digits) {
+    public BigDecimal calculateFrom(final int n, final int digits) {
         return mod(calculateTo(n + digits), mask(n));
     }
 
     @Override
-    public BigDecimal calculateDigitsFrom(int n, int digits) {
-        BigDecimal scale = big(10).pow(n + digits - 1);
+    public BigDecimal calculateDigitsFrom(final int n, final int digits) {
+        final BigDecimal scale = big(10).pow(n + digits - 1);
         return calculateFrom(n, digits).multiply(scale).stripTrailingZeros();
     }
 
@@ -58,73 +58,75 @@ public class BellardCalculator implements IPiCalculator {
         return big(1).divide(big(2).pow(6), context);
     }
 
-    private BigDecimal calculateLeft(int n) {
+    private BigDecimal calculateLeft(final int n) {
         return big(1).negate().pow(n).divide(big(2).pow(10).pow(n), context);
     }
 
-    private BigDecimal calculateRight(BigDecimal n) {
+    private BigDecimal calculateRight(final BigDecimal n) {
         return calculateRight6(n).add(
                 calculateRight5(n).add(calculateRight4(n).add(
                         calculateRight3(n).add(calculateRight2(n).add(
                                 calculateRight1(n).add(calculateRight0(n)))))));
     }
 
-    private BigDecimal calculateRight0(BigDecimal n) {
+    private BigDecimal calculateRight0(final BigDecimal n) {
         return big(2).pow(5).divide(big(4).multiply(n).add(big(1)), context).negate();
     }
 
-    private BigDecimal calculateRight1(BigDecimal n) {
+    private BigDecimal calculateRight1(final BigDecimal n) {
         return big(1).divide(big(4).multiply(n).add(big(3)), context).negate();
     }
 
-    private BigDecimal calculateRight2(BigDecimal n) {
+    private BigDecimal calculateRight2(final BigDecimal n) {
         return big(2).pow(8).divide(big(10).multiply(n).add(big(1)), context);
     }
 
-    private BigDecimal calculateRight3(BigDecimal n) {
+    private BigDecimal calculateRight3(final BigDecimal n) {
         return big(2).pow(6).divide(big(10).multiply(n).add(big(3)), context).negate();
     }
 
-    private BigDecimal calculateRight4(BigDecimal n) {
+    private BigDecimal calculateRight4(final BigDecimal n) {
         return big(2).pow(2).divide(big(10).multiply(n).add(big(5)), context).negate();
     }
 
-    private BigDecimal calculateRight5(BigDecimal n) {
+    private BigDecimal calculateRight5(final BigDecimal n) {
         return big(2).pow(2).divide(big(10).multiply(n).add(big(7)), context).negate();
     }
 
-    private BigDecimal calculateRight6(BigDecimal n) {
+    private BigDecimal calculateRight6(final BigDecimal n) {
         return big(1).divide(big(10).multiply(n).add(big(9)), context);
     }
 
-    private BigDecimal calculateAddend(int n) {
+    private BigDecimal calculateAddend(final int n) {
         return calculateLeft(n).multiply(calculateRight(big(n)));
     }
 
-    private BigDecimal big(int n) {
+    private BigDecimal big(final int n) {
         return new BigDecimal(n);
     }
 
-    private BigDecimal mod(BigDecimal n, BigDecimal divisor) {
+    private BigDecimal mod(final BigDecimal n, final BigDecimal divisor) {
         return n.divideAndRemainder(divisor, context)[1];
     }
 
-    private BigDecimal invert(BigDecimal n) {
+    private BigDecimal invert(final BigDecimal n) {
         return big(1).divide(n, context);
     }
 
-    private BigDecimal round(BigDecimal n, int digits) {
+    private BigDecimal round(final BigDecimal n, final int digits) {
         if (digits < 1) return n;
         return n.setScale(digits - 1, RoundingMode.DOWN);
     }
 
-    private BigDecimal mask(int digits) {
+    private BigDecimal mask(final int digits) {
         if (digits < 1) return big(10);
         return invert(big(10).pow(digits - 1));
     }
 
-    private void adjustPrecision(int digits) {
-        int precision = context.getPrecision();
-        if (digits > precision) context = new MathContext(digits, RoundingMode.HALF_EVEN);
+    private void adjustPrecision(final int digits) {
+        final int precision = context.getPrecision();
+        if (digits > precision) {
+            context = new MathContext(digits, RoundingMode.HALF_EVEN);
+        }
     }
 }

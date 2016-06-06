@@ -1,4 +1,3 @@
-// TODO: rename this project something other than scratchapp
 package com.gmail.fawkes.alex.scrollpi.math;
 
 import android.app.Application;

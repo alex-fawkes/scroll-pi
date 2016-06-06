@@ -14,16 +14,16 @@ import java.util.List;
 public class PiCalculatorRunner {
     private final IPiCalculator calculator;
 
-    public PiCalculatorRunner(IPiCalculator calculator) {
+    public PiCalculatorRunner(final IPiCalculator calculator) {
         this.calculator = calculator;
     }
 
-    public void run(Collection<IPiCalculatorCase> cases) throws TestFailedException {
-        List<CaseFailedException> exceptions = new ArrayList<>();
-        for (IPiCalculatorCase c : cases) {
+    public void run(final Collection<IPiCalculatorCase> cases) throws TestFailedException {
+        final List<CaseFailedException> exceptions = new ArrayList<>();
+        for (final IPiCalculatorCase c : cases) {
             try {
                 c.test(calculator);
-            } catch (CaseFailedException e) {
+            } catch (final CaseFailedException e) {
                 exceptions.add(e);
             }
         }

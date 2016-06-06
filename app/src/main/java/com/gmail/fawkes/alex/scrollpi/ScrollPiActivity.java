@@ -10,9 +10,11 @@ import com.gmail.fawkes.alex.scrollpi.utilities.U;
 import java.util.Random;
 
 public class ScrollPiActivity extends Activity {
+    private static final Random random = new Random();
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onCreate(final Bundle state) {
+        super.onCreate(state);
         setContentView(R.layout.activity_scroll_pi);
         new Thread(new Loop()).start();
     }
@@ -20,10 +22,7 @@ public class ScrollPiActivity extends Activity {
     private void displayRandom() {
         View view = findViewById(R.id.textView);
         if (view instanceof TextView) {
-            // avoid threading issues entirely with local random instance
-            Random random = new Random();
-
-            StringBuilder text = new StringBuilder();
+            final StringBuilder text = new StringBuilder();
             for (int i = 0; i < 100; ++i) {
                 text.append(U.str(random.nextInt(10)));
             }
@@ -36,7 +35,7 @@ public class ScrollPiActivity extends Activity {
         public void run() {
             try {
                 loop();
-            } catch (InterruptedException e) {
+            } catch (final InterruptedException e) {
                 // stop
             }
         }

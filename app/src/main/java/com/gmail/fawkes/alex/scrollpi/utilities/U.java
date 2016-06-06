@@ -44,32 +44,32 @@ public final class U {
         return join(map(split(string, "'"), DOUBLE_TO_SINGLE), "\"");
     }
 
-    public static List<String> split(String string, final String separator) {
+    public static List<String> split(final String string, final String separator) {
         return Arrays.asList(string.split(separator));
     }
 
     public static String join(final List<String> strings, final String separator) {
         final StringBuilder builder = new StringBuilder();
-        for (String s : strings) {
-            builder.append(s);
-            if (!last(strings, s)) {
+        for (final String string : strings) {
+            builder.append(string);
+            if (!last(strings, string)) {
                 builder.append(separator);
             }
         }
         return builder.toString();
     }
 
-    public static <E> List<E> map(final List<E> elements, Function.Return1<E, E> function) {
+    public static <E> List<E> map(final List<E> elements, final Function.Return1<E, E> function) {
         final List<E> mapped = new ArrayList<>();
-        for (E e : elements) {
-            mapped.add(function.execute(e));
+        for (final E element : elements) {
+            mapped.add(function.execute(element));
         }
         return mapped;
     }
 
     private static class DoubleToSingle implements Function.Return1<String, String> {
         @Override
-        public String execute(String string) {
+        public String execute(final String string) {
             return string.replace("\"", "'");
         }
     }

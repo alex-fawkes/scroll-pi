@@ -9,7 +9,7 @@ import java.util.List;
  * Thrown when PiCalculatorRunner encounters failed test cases.
  */
 class TestFailedException extends Exception {
-    public TestFailedException(List<CaseFailedException> cases) {
+    public TestFailedException(final List<CaseFailedException> cases) {
         super(getJsonList(getJsonElements(cases)));
     }
 

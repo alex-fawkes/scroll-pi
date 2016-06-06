@@ -7,17 +7,17 @@ public class CalculateDigitsFromCase extends PiCalculatorCase {
     private final int n;
     private final int digits;
 
-    public CalculateDigitsFromCase(String expected, int n, int digits) {
+    public CalculateDigitsFromCase(final String expected, final int n, final int digits) {
         super(getDescription(n, digits), expected);
         this.n = n;
         this.digits = digits;
     }
 
-    private static String getDescription(int n, int digits) {
+    private static String getDescription(final int n, final int digits) {
         return "CalculateDigitsFrom.isCorrect(" + U.str(n) + ", " + U.str(digits);
     }
 
-    public String calculate(IPiCalculator calculator) {
+    public String calculate(final IPiCalculator calculator) {
         return calculator.calculateDigitsFrom(n, digits).toPlainString();
     }
 }

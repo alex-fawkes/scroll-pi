@@ -13,7 +13,7 @@ public abstract class PiCalculatorCase implements IPiCalculatorCase {
 
     protected abstract String calculate(IPiCalculator calculator);
 
-    public void test(IPiCalculator calculator) throws CaseFailedException {
+    public void test(final IPiCalculator calculator) throws CaseFailedException {
         final String actual = calculate(calculator);
         if (!actual.equals(expected)) {
             throw new CaseFailedException(description, expected, actual);
