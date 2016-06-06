@@ -9,7 +9,7 @@ import net.ddns.adfawkes.scratchapp.extensions.X;
 
 import java.util.Random;
 
-public class MainActivity extends Activity {
+public class ScrollPiActivity extends Activity {
     static {
         System.loadLibrary("picalc");
     }
@@ -66,7 +66,6 @@ public class MainActivity extends Activity {
 
         @Override
         public void run() {
-            // TODO: rename class
             view.append(text);
 
             // TODO: extract fn
