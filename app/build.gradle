@@ -6,18 +6,18 @@ model {
         buildToolsVersion '23.0.3'
 
         defaultConfig {
-            applicationId 'com.gmail.fawkes.alex.scratchapp'
+            applicationId 'com.gmail.fawkes.alex.scrollpi'
             minSdkVersion.apiLevel 15
             targetSdkVersion.apiLevel 23
             versionCode 1
-            versionName "1.0"
+            versionName '1.0'
         }
 
         ndk {
             moduleName 'fawkes'
             toolchain = 'clang'
             CFlags.addAll(['-Wall'])
-            stl "stlport_static"
+            stl 'stlport_static'
         }
 
         buildTypes {
@@ -26,36 +26,10 @@ model {
                 proguardFiles.add(file('proguard-android.txt'))
             }
         }
-
-        productFlavors {
-            create('arm') {
-                ndk.abiFilters.add('armeabi')
-            }
-            create('arm7') {
-                ndk.abiFilters.add('armeabi-v7a')
-            }
-            create('arm8') {
-                ndk.abiFilters.add('arm64-v8a')
-            }
-            create('x86') {
-                ndk.abiFilters.add('x86')
-            }
-            create('x86-64') {
-                ndk.abiFilters.add('x86_64')
-            }
-            create('mips') {
-                ndk.abiFilters.add('mips')
-            }
-            create('mips-64') {
-                ndk.abiFilters.add('mips64')
-            }
-            create('all')
-        }
     }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.4.0'
 }
