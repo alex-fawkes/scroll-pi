@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 /**
  * BBP calculator over JNI bindings.
  */
-public class FastBbpCalculator implements IPiCalculator {
+public class FastBbpCalculator implements PiCalculator {
     public BigDecimal calculateTo(final int digits) {
         return new BigDecimal(NativeBbp.calculateTo(digits));
     }

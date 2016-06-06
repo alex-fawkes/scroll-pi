@@ -6,7 +6,7 @@ import com.gmail.fawkes.alex.scrollpi.math.testing.PiCalculatorRunner;
 import org.junit.Ignore;
 import org.junit.Test;
 
-@Ignore("Base class for all IPiCalculator unit tests.")
+@Ignore("Base class for all PiCalculator unit tests.")
 public abstract class PiCalculatorTest {
     private final PiCalculatorRunner runner;
 
@@ -14,7 +14,7 @@ public abstract class PiCalculatorTest {
         runner = new PiCalculatorRunner(getCalculator());
     }
 
-    protected abstract IPiCalculator getCalculator();
+    protected abstract PiCalculator getCalculator();
 
     @Test
     public void testAllCases() throws Exception {

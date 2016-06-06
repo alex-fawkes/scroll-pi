@@ -1,9 +1,9 @@
 package com.gmail.fawkes.alex.scrollpi.math.testing;
 
-import com.gmail.fawkes.alex.scrollpi.math.IPiCalculator;
+import com.gmail.fawkes.alex.scrollpi.math.PiCalculator;
 import com.gmail.fawkes.alex.scrollpi.utilities.U;
 
-public class CalculateFromCase extends PiCalculatorCase {
+public class CalculateFromCase extends EqualityCase {
     private final int n;
     private final int digits;
 
@@ -17,7 +17,7 @@ public class CalculateFromCase extends PiCalculatorCase {
         return "CalculateFrom.isCorrect(" + U.str(n) + ", " + U.str(digits) + ")";
     }
 
-    public String calculate(final IPiCalculator calculator) {
+    public String calculate(final PiCalculator calculator) {
         return calculator.calculateFrom(n, digits).toPlainString();
     }
 }

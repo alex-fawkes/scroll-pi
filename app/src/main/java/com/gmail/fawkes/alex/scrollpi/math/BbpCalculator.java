@@ -14,7 +14,7 @@ import java.math.RoundingMode;
  */
 // TODO: deduplicate versus bellard, native bpp_calculation
 // TODO: general cleanup
-public class BbpCalculator implements IPiCalculator {
+public class BbpCalculator implements PiCalculator {
     // TODO: adjustable precision
     private final MathContext context = new MathContext(1024, RoundingMode.HALF_EVEN);
 

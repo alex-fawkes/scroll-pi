@@ -1,6 +1,6 @@
 package com.gmail.fawkes.alex.scrollpi.math.testing;
 
-import com.gmail.fawkes.alex.scrollpi.math.IPiCalculator;
+import com.gmail.fawkes.alex.scrollpi.math.PiCalculator;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,15 +12,15 @@ import java.util.List;
  * to identify all failed tests.
  */
 public class PiCalculatorRunner {
-    private final IPiCalculator calculator;
+    private final PiCalculator calculator;
 
-    public PiCalculatorRunner(final IPiCalculator calculator) {
+    public PiCalculatorRunner(final PiCalculator calculator) {
         this.calculator = calculator;
     }
 
-    public void run(final Collection<IPiCalculatorCase> cases) throws TestFailedException {
+    public void run(final Collection<PiCalculatorCase> cases) throws TestFailedException {
         final List<CaseFailedException> exceptions = new ArrayList<>();
-        for (final IPiCalculatorCase c : cases) {
+        for (final PiCalculatorCase c : cases) {
             try {
                 c.test(calculator);
             } catch (final CaseFailedException e) {

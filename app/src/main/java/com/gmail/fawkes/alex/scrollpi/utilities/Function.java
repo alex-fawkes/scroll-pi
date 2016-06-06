@@ -1,7 +1,5 @@
 package com.gmail.fawkes.alex.scrollpi.utilities;
 
-// TODO: remove "I" prefix from interfaces
-
 @SuppressWarnings("unused") // avoid implementing each specific case on first use
 class Function {
     private Function() {
