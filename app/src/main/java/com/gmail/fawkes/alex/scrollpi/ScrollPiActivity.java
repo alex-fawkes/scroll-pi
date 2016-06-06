@@ -19,15 +19,21 @@ public class ScrollPiActivity extends Activity {
         new Thread(new Loop()).start();
     }
 
-    private void displayRandom() {
+    private void displayRandomDigits() {
         View view = findViewById(R.id.textView);
         if (view instanceof TextView) {
-            final StringBuilder text = new StringBuilder();
-            for (int i = 0; i < 100; ++i) {
-                text.append(U.str(random.nextInt(10)));
-            }
-            view.post(new Append((TextView) view, text.toString()));
+            final String text = getRandomDigits();
+            view.post(new AppendTextView((TextView) view, text));
         }
+    }
+
+    private String getRandomDigits() {
+        final StringBuilder text = new StringBuilder();
+        for (int i = 0; i < 100; ++i) {
+            final int digit = random.nextInt(10);
+            text.append(U.string(digit));
+        }
+        return text.toString();
     }
 
     private class Loop implements Runnable {
@@ -43,34 +49,8 @@ public class ScrollPiActivity extends Activity {
         @SuppressWarnings("InfiniteLoopStatement") // threaded infinite pi calculation
         private void loop() throws InterruptedException {
             while (true) {
-                displayRandom();
+                displayRandomDigits();
                 Thread.sleep(10);
-            }
-        }
-
-    }
-
-    private class Append implements Runnable {
-        private final TextView view;
-        private final String text;
-
-        public Append(TextView view, String text) {
-            this.view = view;
-            this.text = text;
-        }
-
-        @Override
-        public void run() {
-            view.append(text);
-
-            // TODO: extract fn
-            final CharSequence current = view.getText();
-            final int length = current.length();
-
-            final int limit = 2000;
-            if (length > limit) {
-                final int begin = length - limit * 3 / 4;
-                view.setText(current.subSequence(begin, length));
             }
         }
     }

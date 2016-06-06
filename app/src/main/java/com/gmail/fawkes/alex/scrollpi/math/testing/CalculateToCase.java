@@ -12,7 +12,7 @@ public class CalculateToCase extends EqualityCase {
     }
 
     private static String getDescription(int n) {
-        return "CalculateTo.isCorrect(" + U.str(n) + ")";
+        return "CalculateTo.isCorrect(" + U.string(n) + ")";
     }
 
     public String calculate(final PiCalculator calculator) {

@@ -14,7 +14,7 @@ public class CalculateFromCase extends EqualityCase {
     }
 
     private static String getDescription(final int n, final int digits) {
-        return "CalculateFrom.isCorrect(" + U.str(n) + ", " + U.str(digits) + ")";
+        return "CalculateFrom.isCorrect(" + U.string(n) + ", " + U.string(digits) + ")";
     }
 
     public String calculate(final PiCalculator calculator) {

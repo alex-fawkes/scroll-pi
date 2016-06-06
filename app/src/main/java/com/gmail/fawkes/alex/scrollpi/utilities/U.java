@@ -9,12 +9,12 @@ import java.util.List;
  */
 @SuppressWarnings({"WeakerAccess", "SameParameterValue"}) // exposed for future use
 public final class U {
-    private static final DoubleToSingle DOUBLE_TO_SINGLE = new DoubleToSingle();
+    private static final ConvertDoubleQuotes converter = new ConvertDoubleQuotes();
 
     private U() {
     }
 
-    public static String str(final int n) {
+    public static String string(final int n) {
         return String.valueOf(n);
     }
 
@@ -41,7 +41,7 @@ public final class U {
      * Swap single and double quotes.
      */
     public static String quote(final String string) {
-        return join(map(split(string, "'"), DOUBLE_TO_SINGLE), "\"");
+        return join(map(split(string, "'"), converter), "\"");
     }
 
     public static List<String> split(final String string, final String separator) {
@@ -67,7 +67,7 @@ public final class U {
         return mapped;
     }
 
-    private static class DoubleToSingle implements Function.Return1<String, String> {
+    private static class ConvertDoubleQuotes implements Function.Return1<String, String> {
         @Override
         public String execute(final String string) {
             return string.replace("\"", "'");
