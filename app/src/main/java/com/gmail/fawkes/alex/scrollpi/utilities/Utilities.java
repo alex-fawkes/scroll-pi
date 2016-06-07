@@ -16,8 +16,8 @@ public final class Utilities {
     private Utilities() {
     }
 
-    public static String string(final int n) {
-        return String.valueOf(n);
+    public static String string(final int value) {
+        return String.valueOf(value);
     }
 
     /**
@@ -61,8 +61,7 @@ public final class Utilities {
         return builder.toString();
     }
 
-    public static <E, F> List<F> map(
-            final List<E> elements, final Function1<F, E> function) {
+    public static <E, F> List<F> map(final List<E> elements, final Function1<F, E> function) {
         final List<F> mapped = new ArrayList<>();
         for (final E element : elements) {
             mapped.add(function.execute(element));

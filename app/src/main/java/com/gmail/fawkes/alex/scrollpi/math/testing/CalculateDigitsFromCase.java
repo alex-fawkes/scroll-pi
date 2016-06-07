@@ -5,12 +5,12 @@ import com.gmail.fawkes.alex.scrollpi.math.PiCalculator;
 import static com.gmail.fawkes.alex.scrollpi.utilities.Utilities.string;
 
 public class CalculateDigitsFromCase extends EqualityCase {
-    private final int n;
+    private final int index;
     private final int digits;
 
-    public CalculateDigitsFromCase(final String expected, final int n, final int digits) {
-        super(getDescription(n, digits), expected);
-        this.n = n;
+    public CalculateDigitsFromCase(final String expected, final int index, final int digits) {
+        super(getDescription(index, digits), expected);
+        this.index = index;
         this.digits = digits;
     }
 
@@ -19,6 +19,6 @@ public class CalculateDigitsFromCase extends EqualityCase {
     }
 
     public String calculate(final PiCalculator calculator) {
-        return calculator.calculateDigitsFrom(n, digits).toPlainString();
+        return calculator.calculateDigitsFrom(index, digits).toPlainString();
     }
 }

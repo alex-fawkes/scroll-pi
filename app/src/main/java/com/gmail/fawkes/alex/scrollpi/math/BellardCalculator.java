@@ -29,54 +29,54 @@ import java.math.BigDecimal;
  */
 public class BellardCalculator extends BaseCalculator {
     @Override
-    protected BigDecimal calculateAddend(final BigDecimal n) {
-        return left(n).multiply(right(n));
+    protected BigDecimal calculateAddend(final BigDecimal index) {
+        return left(index).multiply(right(index));
     }
 
     @Override
-    protected BigDecimal scaleSum(final BigDecimal sum) {
-        return sum.multiply(scale());
+    protected BigDecimal scaleSum(final BigDecimal index) {
+        return index.multiply(scale());
     }
 
-    private BigDecimal left(final BigDecimal n) {
-        return big(1).negate().pow(n.intValue()).multiply(invert(divisor(n)));
+    private BigDecimal left(final BigDecimal index) {
+        return big(1).negate().pow(index.intValue()).multiply(invert(divisor(index)));
     }
 
-    private BigDecimal divisor(final BigDecimal n) {
-        return big(2).pow(10).pow(n.intValue());
+    private BigDecimal divisor(final BigDecimal index) {
+        return big(2).pow(10).pow(index.intValue());
     }
 
-    private BigDecimal right(final BigDecimal n) {
-        return right6(n).add(right5(n).add(right4(n).add(
-                right3(n).add(right2(n).add(right1(n).add(right0(n)))))));
+    private BigDecimal right(final BigDecimal index) {
+        return right6(index).add(right5(index).add(right4(index).add(
+                right3(index).add(right2(index).add(right1(index).add(right0(index)))))));
     }
 
-    private BigDecimal right0(final BigDecimal n) {
-        return big(2).pow(5).multiply(invert(big(4).multiply(n).add(big(1)))).negate();
+    private BigDecimal right0(final BigDecimal index) {
+        return big(2).pow(5).multiply(invert(big(4).multiply(index).add(big(1)))).negate();
     }
 
-    private BigDecimal right1(final BigDecimal n) {
-        return big(1).multiply(invert(big(4).multiply(n).add(big(3)))).negate();
+    private BigDecimal right1(final BigDecimal index) {
+        return big(1).multiply(invert(big(4).multiply(index).add(big(3)))).negate();
     }
 
-    private BigDecimal right2(final BigDecimal n) {
-        return big(2).pow(8).multiply(invert(big(10).multiply(n).add(big(1))));
+    private BigDecimal right2(final BigDecimal index) {
+        return big(2).pow(8).multiply(invert(big(10).multiply(index).add(big(1))));
     }
 
-    private BigDecimal right3(final BigDecimal n) {
-        return big(2).pow(6).multiply(invert(big(10).multiply(n).add(big(3)))).negate();
+    private BigDecimal right3(final BigDecimal index) {
+        return big(2).pow(6).multiply(invert(big(10).multiply(index).add(big(3)))).negate();
     }
 
-    private BigDecimal right4(final BigDecimal n) {
-        return big(2).pow(2).multiply(invert(big(10).multiply(n).add(big(5)))).negate();
+    private BigDecimal right4(final BigDecimal index) {
+        return big(2).pow(2).multiply(invert(big(10).multiply(index).add(big(5)))).negate();
     }
 
-    private BigDecimal right5(final BigDecimal n) {
-        return big(2).pow(2).multiply(invert(big(10).multiply(n).add(big(7)))).negate();
+    private BigDecimal right5(final BigDecimal index) {
+        return big(2).pow(2).multiply(invert(big(10).multiply(index).add(big(7)))).negate();
     }
 
-    private BigDecimal right6(final BigDecimal n) {
-        return big(1).multiply(invert(big(10).multiply(n).add(big(9))));
+    private BigDecimal right6(final BigDecimal index) {
+        return big(1).multiply(invert(big(10).multiply(index).add(big(9))));
     }
 
     private BigDecimal scale() {

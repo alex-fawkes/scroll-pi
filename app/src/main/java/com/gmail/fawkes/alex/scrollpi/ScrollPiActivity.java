@@ -41,7 +41,7 @@ public class ScrollPiActivity extends Activity {
         public void run() {
             try {
                 loop();
-            } catch (final InterruptedException e) {
+            } catch (final InterruptedException exception) {
                 // stop
             }
         }

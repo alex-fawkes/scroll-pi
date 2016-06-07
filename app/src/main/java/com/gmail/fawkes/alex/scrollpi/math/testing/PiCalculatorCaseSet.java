@@ -60,8 +60,8 @@ public final class PiCalculatorCaseSet {
             return make("3.1415926535897932384626433832795028841971693993751", 50);
         }
 
-        private static PiCalculatorCase make(String expected, int n) {
-            return new CalculateCase(expected, n);
+        private static PiCalculatorCase make(String expected, int index) {
+            return new CalculateCase(expected, index);
         }
     }
 
@@ -104,8 +104,8 @@ public final class PiCalculatorCaseSet {
             return make("0.0000000000000000000000003832795028841971693993751", 25, 25);
         }
 
-        private static PiCalculatorCase make(String expected, int n, int digits) {
-            return new CalculateFromCase(expected, n, digits);
+        private static PiCalculatorCase make(String expected, int index, int digits) {
+            return new CalculateFromCase(expected, index, digits);
         }
     }
 
@@ -148,8 +148,8 @@ public final class PiCalculatorCaseSet {
             return make("3832795028841971693993751", 25, 25);
         }
 
-        private static PiCalculatorCase make(String expected, int n, int digits) {
-            return new CalculateDigitsFromCase(expected, n, digits);
+        private static PiCalculatorCase make(String expected, int index, int digits) {
+            return new CalculateDigitsFromCase(expected, index, digits);
         }
     }
 }

@@ -14,28 +14,28 @@ public abstract class BaseCalculator implements PiCalculator {
     }
 
     @Override
-    public final BigDecimal calculateFrom(final int n, final int digits) {
+    public final BigDecimal calculateFrom(final int index, final int digits) {
         calibrate(digits);
-        return mod(calculate(n + digits), mask(n));
+        return mod(calculate(index + digits), mask(index));
     }
 
     @Override
-    public final BigDecimal calculateDigitsFrom(final int n, final int digits) {
+    public final BigDecimal calculateDigitsFrom(final int index, final int digits) {
         calibrate(digits);
-        final BigDecimal scale = big(10).pow(n + digits - 1);
-        return calculateFrom(n, digits).multiply(scale).stripTrailingZeros();
+        final BigDecimal scale = big(10).pow(index + digits - 1);
+        return calculateFrom(index, digits).multiply(scale).stripTrailingZeros();
     }
 
-    protected abstract BigDecimal calculateAddend(BigDecimal n);
+    protected abstract BigDecimal calculateAddend(BigDecimal index);
 
-    protected abstract BigDecimal scaleSum(BigDecimal n);
+    protected abstract BigDecimal scaleSum(BigDecimal index);
 
-    BigDecimal big(final int n) {
-        return new BigDecimal(n);
+    BigDecimal big(final int index) {
+        return new BigDecimal(index);
     }
 
-    BigDecimal invert(final BigDecimal n) {
-        return big(1).divide(n, context);
+    BigDecimal invert(final BigDecimal index) {
+        return big(1).divide(index, context);
     }
 
     /**
@@ -49,15 +49,15 @@ public abstract class BaseCalculator implements PiCalculator {
         }
     }
 
-    private BigDecimal mod(final BigDecimal n, final BigDecimal divisor) {
-        return n.divideAndRemainder(divisor, context)[1];
+    private BigDecimal mod(final BigDecimal index, final BigDecimal divisor) {
+        return index.divideAndRemainder(divisor, context)[1];
     }
 
-    private BigDecimal round(final BigDecimal n, final int digits) {
+    private BigDecimal round(final BigDecimal index, final int digits) {
         if (digits < 1) {
-            return n;
+            return index;
         }
-        return n.setScale(digits - 1, RoundingMode.DOWN);
+        return index.setScale(digits - 1, RoundingMode.DOWN);
     }
 
     private BigDecimal mask(final int digits) {
@@ -67,11 +67,11 @@ public abstract class BaseCalculator implements PiCalculator {
         return invert(big(10).pow(digits - 1));
     }
 
-    private BigDecimal pi(final int n) {
+    private BigDecimal pi(final int index) {
         BigDecimal sum = big(0);
-        for (int i = 0; i < n; ++i) {
+        for (int i = 0; i < index; ++i) {
             sum = sum.add(calculateAddend(big(i)));
         }
-        return round(scaleSum(sum), n);
+        return round(scaleSum(sum), index);
     }
 }

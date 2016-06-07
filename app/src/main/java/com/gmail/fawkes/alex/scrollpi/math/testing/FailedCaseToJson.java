@@ -4,7 +4,7 @@ import com.gmail.fawkes.alex.scrollpi.functional.Function1;
 
 class FailedCaseToJson implements Function1<String, CaseFailedException> {
     @Override
-    public String execute(CaseFailedException e) {
-        return e.toJson();
+    public String execute(CaseFailedException exception) {
+        return exception.toJson();
     }
 }

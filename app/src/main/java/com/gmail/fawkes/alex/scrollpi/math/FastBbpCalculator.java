@@ -10,13 +10,11 @@ public class FastBbpCalculator implements PiCalculator {
         return new BigDecimal(NativeBbpAlgorithm.calculate(digits));
     }
 
-    // TODO: "n" should be "index"... does this match algorithm descriptions?
-    public BigDecimal calculateFrom(final int n, final int digits) {
-        return new BigDecimal(NativeBbpAlgorithm.calculateFrom(n, digits));
+    public BigDecimal calculateFrom(final int index, final int digits) {
+        return new BigDecimal(NativeBbpAlgorithm.calculateFrom(index, digits));
     }
 
-    // TODO: remove single letter variables
-    public BigDecimal calculateDigitsFrom(final int n, final int digits) {
-        return new BigDecimal(NativeBbpAlgorithm.calculateDigitsFrom(n, digits));
+    public BigDecimal calculateDigitsFrom(final int index, final int digits) {
+        return new BigDecimal(NativeBbpAlgorithm.calculateDigitsFrom(index, digits));
     }
 }

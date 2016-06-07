@@ -10,7 +10,7 @@ class NativeBbpAlgorithm {
 
     public static native String calculate(int digits);
 
-    public static native String calculateFrom(int n, int digits);
+    public static native String calculateFrom(int value, int digits);
 
-    public static native String calculateDigitsFrom(int n, int digits);
+    public static native String calculateDigitsFrom(int value, int digits);
 }

@@ -25,40 +25,38 @@ import java.math.BigDecimal;
  * This is not the spigot form of the algorithm, which can calculate
  * any digit of pi without calculating preceding digits.
  */
-// TODO: deduplicate versus bellard, native bpp_calculation
-// TODO: general cleanup
 public class BbpCalculator extends BaseCalculator {
     @Override
-    protected BigDecimal calculateAddend(final BigDecimal n) {
-        return left(n).multiply(right(n));
+    protected BigDecimal calculateAddend(final BigDecimal index) {
+        return left(index).multiply(right(index));
     }
 
     @Override
-    protected BigDecimal scaleSum(final BigDecimal n) {
-        return n;
+    protected BigDecimal scaleSum(final BigDecimal index) {
+        return index;
     }
 
-    private BigDecimal left(final BigDecimal n) {
-        return invert(big(16).pow(n.intValue()));
+    private BigDecimal left(final BigDecimal index) {
+        return invert(big(16).pow(index.intValue()));
     }
 
-    private BigDecimal right(final BigDecimal n) {
-        return right3(n).add(right2(n).add(right1(n).add(right0(n))));
+    private BigDecimal right(final BigDecimal index) {
+        return right3(index).add(right2(index).add(right1(index).add(right0(index))));
     }
 
-    private BigDecimal right0(final BigDecimal n) {
-        return big(4).multiply(invert(big(8).multiply(n).add(big(1))));
+    private BigDecimal right0(final BigDecimal index) {
+        return big(4).multiply(invert(big(8).multiply(index).add(big(1))));
     }
 
-    private BigDecimal right1(final BigDecimal n) {
-        return big(2).multiply(invert(big(8).multiply(n).add(big(4)))).negate();
+    private BigDecimal right1(final BigDecimal index) {
+        return big(2).multiply(invert(big(8).multiply(index).add(big(4)))).negate();
     }
 
-    private BigDecimal right2(final BigDecimal n) {
-        return invert(big(8).multiply(n).add(big(5))).negate();
+    private BigDecimal right2(final BigDecimal index) {
+        return invert(big(8).multiply(index).add(big(5))).negate();
     }
 
-    private BigDecimal right3(final BigDecimal n) {
-        return invert(big(8).multiply(n).add(big(6))).negate();
+    private BigDecimal right3(final BigDecimal index) {
+        return invert(big(8).multiply(index).add(big(6))).negate();
     }
 }

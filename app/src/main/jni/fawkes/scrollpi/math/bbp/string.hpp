@@ -10,11 +10,11 @@ namespace fawkes {
                 namespace string {
                     std::string calculate(const int digits);
 
-                    std::string calculate_from(const int n, const int digits);
+                    std::string calculate_from(const int index, const int digits);
 
-                    std::string calculate_digits_from(const int n, const int digits);
+                    std::string calculate_digits_from(const int index, const int digits);
 
-                    std::string stringify(const double d, const int digits);
+                    std::string stringify(const double value, const int digits);
                 }
             }
         }
