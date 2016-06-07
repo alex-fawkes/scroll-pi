@@ -1,5 +1,7 @@
 package com.gmail.fawkes.alex.scrollpi.utilities;
 
+import com.gmail.fawkes.alex.scrollpi.functional.Function1;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -7,7 +9,7 @@ import java.util.List;
 /**
  * Shortcut for quick utility methods with no heavy dependencies.
  */
-@SuppressWarnings({"WeakerAccess", "SameParameterValue"}) // exposed for future use
+@SuppressWarnings({"SameParameterValue", "WeakerAccess", "unused"}) // for future use
 public final class Utilities {
     private static final ConvertDoubleQuotes converter = new ConvertDoubleQuotes();
 
@@ -59,18 +61,12 @@ public final class Utilities {
         return builder.toString();
     }
 
-    public static <E> List<E> map(final List<E> elements, final Function.Return1<E, E> function) {
-        final List<E> mapped = new ArrayList<>();
+    public static <E, F> List<F> map(
+            final List<E> elements, final Function1<F, E> function) {
+        final List<F> mapped = new ArrayList<>();
         for (final E element : elements) {
             mapped.add(function.execute(element));
         }
         return mapped;
-    }
-
-    private static class ConvertDoubleQuotes implements Function.Return1<String, String> {
-        @Override
-        public String execute(final String string) {
-            return string.replace("\"", "'");
-        }
     }
 }

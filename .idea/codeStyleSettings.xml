@@ -34,6 +34,12 @@
         <AndroidXmlCodeStyleSettings>
           <option name="USE_CUSTOM_SETTINGS" value="true" />
         </AndroidXmlCodeStyleSettings>
+        <Objective-C>
+          <option name="SPACE_BEFORE_POINTER_IN_DECLARATION" value="false" />
+          <option name="SPACE_AFTER_POINTER_IN_DECLARATION" value="true" />
+          <option name="SPACE_BEFORE_REFERENCE_IN_DECLARATION" value="false" />
+          <option name="SPACE_AFTER_REFERENCE_IN_DECLARATION" value="true" />
+        </Objective-C>
         <Objective-C-extensions>
           <option name="GENERATE_INSTANCE_VARIABLES_FOR_PROPERTIES" value="ASK" />
           <option name="RELEASE_STYLE" value="IVAR" />
@@ -226,6 +232,6 @@
         </codeStyleSettings>
       </value>
     </option>
-    <option name="PREFERRED_PROJECT_CODE_STYLE" value="Default (1)" />
+    <option name="USE_PER_PROJECT_SETTINGS" value="true" />
   </component>
 </project>
