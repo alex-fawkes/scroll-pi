@@ -30,6 +30,7 @@ public final class PiCalculatorCaseSet {
             cases.add(getIsCorrectTo1());
             cases.add(getIsCorrectTo2());
             cases.add(getIsCorrectTo3());
+            cases.add(getIsCorrectTo10());
             cases.add(getIsCorrectTo25());
             cases.add(getIsCorrectTo50());
             return cases;
@@ -45,6 +46,10 @@ public final class PiCalculatorCaseSet {
 
         private static PiCalculatorCase getIsCorrectTo3() {
             return make("3.14", 3);
+        }
+
+        private static PiCalculatorCase getIsCorrectTo10() {
+            return make("3.141592653", 10);
         }
 
         private static PiCalculatorCase getIsCorrectTo25() {
@@ -69,6 +74,7 @@ public final class PiCalculatorCaseSet {
             cases.add(getIsCorrect3From0());
             cases.add(getIsCorrect3From1());
             cases.add(getIsCorrect3From2());
+            cases.add(getIsCorrect10From5());
             cases.add(getIsCorrect25From0());
             cases.add(getIsCorrect25From25());
             return cases;
@@ -84,6 +90,10 @@ public final class PiCalculatorCaseSet {
 
         private static PiCalculatorCase getIsCorrect3From2() {
             return make("0.0415", 2, 3);
+        }
+
+        private static PiCalculatorCase getIsCorrect10From5() {
+            return make("0.00009265358979", 5, 10);
         }
 
         private static PiCalculatorCase getIsCorrect25From0() {
@@ -108,6 +118,7 @@ public final class PiCalculatorCaseSet {
             cases.add(getIsCorrect3From0());
             cases.add(getIsCorrect3From1());
             cases.add(getIsCorrect3From2());
+            cases.add(getIsCorrect10From5());
             cases.add(getIsCorrect25From0());
             cases.add(getIsCorrect25From25());
             return cases;
@@ -123,6 +134,10 @@ public final class PiCalculatorCaseSet {
 
         private static PiCalculatorCase getIsCorrect3From2() {
             return make("415", 2, 3);
+        }
+
+        private static PiCalculatorCase getIsCorrect10From5() {
+            return make("9265358979", 5, 10);
         }
 
         private static PiCalculatorCase getIsCorrect25From0() {

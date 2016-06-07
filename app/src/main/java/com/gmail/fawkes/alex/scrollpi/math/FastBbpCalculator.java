@@ -7,16 +7,16 @@ import java.math.BigDecimal;
  */
 public class FastBbpCalculator implements PiCalculator {
     public BigDecimal calculate(final int digits) {
-        return new BigDecimal(NativeBbp.calculate(digits));
+        return new BigDecimal(NativeBbpAlgorithm.calculate(digits));
     }
 
     // TODO: "n" should be "index"... does this match algorithm descriptions?
     public BigDecimal calculateFrom(final int n, final int digits) {
-        return new BigDecimal(NativeBbp.calculateFrom(n, digits));
+        return new BigDecimal(NativeBbpAlgorithm.calculateFrom(n, digits));
     }
 
     // TODO: remove single letter variables
     public BigDecimal calculateDigitsFrom(final int n, final int digits) {
-        return new BigDecimal(NativeBbp.calculateDigitsFrom(n, digits));
+        return new BigDecimal(NativeBbpAlgorithm.calculateDigitsFrom(n, digits));
     }
 }

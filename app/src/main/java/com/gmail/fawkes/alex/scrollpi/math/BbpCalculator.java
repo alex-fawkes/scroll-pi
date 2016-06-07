@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 /**
  * Calculates pi to an arbitrary number of digits using the
  * Bailey–Borwein–Plouffe formula:
- * <p/>
+ * <p>
  * <pre>
  * pi = sigma(n = 0, inf, addend(n))
  *
@@ -21,7 +21,7 @@ import java.math.BigDecimal;
  * right2(n) = -1 / (8n + 5)
  * right3(n) = -1 / (8n + 6)
  * </pre>
- * <p/>
+ * <p>
  * This is not the spigot form of the algorithm, which can calculate
  * any digit of pi without calculating preceding digits.
  */

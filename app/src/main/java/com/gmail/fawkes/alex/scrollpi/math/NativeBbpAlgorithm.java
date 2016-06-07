@@ -1,11 +1,11 @@
 package com.gmail.fawkes.alex.scrollpi.math;
 
-class NativeBbp {
+class NativeBbpAlgorithm {
     static {
         System.loadLibrary("fawkes");
     }
 
-    private NativeBbp() {
+    private NativeBbpAlgorithm() {
     }
 
     public static native String calculate(int digits);

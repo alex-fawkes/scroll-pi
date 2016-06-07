@@ -7,14 +7,24 @@ namespace fawkes {
         namespace math {
             namespace floating {
                 double trunc(const double d, const int digits) {
-                    const double tens(std::pow(10.0, digits - 1));
-                    return static_cast<double>(static_cast<int>(d * tens)) / tens;
+                    const int truncated(static_cast<int>(decimal_shift_left(d, digits)));
+                    return decimal_shift_right(truncated, digits);
                 }
 
-                // TODO: +1, -1 in (pre)trunc supposed to be?
-                // TODO: dox both these
                 double trunc_front(const double d, const int digits) {
-                    return std::fmod(d, std::pow(10.0, 1 - digits));
+                    return std::fmod(d, std::pow(10.0, digits));
+                }
+
+                double trunc_both(const double d, const int front_digits, const int back_digits) {
+                    return trunc(trunc_front(d, front_digits), back_digits);
+                }
+
+                double decimal_shift_left(const double d, const int digits) {
+                    return d * std::pow(10.0, digits);
+                }
+
+                double decimal_shift_right(const double d, const int digits) {
+                    return decimal_shift_left(d, -digits);
                 }
             }
         }

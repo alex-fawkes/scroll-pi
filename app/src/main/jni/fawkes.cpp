@@ -1,4 +1,5 @@
-#include "fawkes/scrollpi/math/bbp.hpp"
+#include "fawkes/scrollpi/math/bbp/string.hpp"
+#include "fawkes/scrollpi/math/floating.hpp"
 
 #include <jni.h>
 
@@ -9,21 +10,75 @@ static jstring to_jstring(JNIEnv* const environment, const std::string& string) 
 }
 
 extern "C" {
-JNIEXPORT jstring JNICALL
-Java_com_gmail_fawkes_alex_scrollpi_math_NativeBbp_calculate(
-        JNIEnv* const environment, const jclass, const int digits) {
-    return to_jstring(environment, bbp::calculate(digits));
+JNIEXPORT jdouble JNICALL
+Java_com_gmail_fawkes_alex_scrollpi_math_NativeFloating_truncate(
+        const JNIEnv* const,
+        const jclass,
+        const jdouble d,
+        const jint digits) {
+    return floating::trunc(d, digits);
+}
+
+JNIEXPORT jdouble JNICALL
+Java_com_gmail_fawkes_alex_scrollpi_math_NativeFloating_truncateFront(
+        const JNIEnv* const,
+        const jclass,
+        const jdouble d,
+        const jint digits) {
+    return floating::trunc_front(d, digits);
+}
+
+JNIEXPORT jdouble JNICALL
+Java_com_gmail_fawkes_alex_scrollpi_math_NativeFloating_truncateBoth(
+        const JNIEnv* const,
+        const jclass,
+        const jdouble d,
+        const jint front_digits,
+        const jint back_digits) {
+    return floating::trunc_both(d, front_digits, back_digits);
+}
+
+JNIEXPORT jdouble JNICALL
+Java_com_gmail_fawkes_alex_scrollpi_math_NativeFloating_decimalShiftLeft(
+        const JNIEnv* const,
+        const jclass,
+        const jdouble d,
+        const jint digits) {
+    return floating::decimal_shift_left(d, digits);
+}
+
+JNIEXPORT jdouble JNICALL
+Java_com_gmail_fawkes_alex_scrollpi_math_NativeFloating_decimalShiftRight(
+        const JNIEnv* const,
+        const jclass,
+        const jdouble d,
+        const jint digits) {
+    return floating::decimal_shift_right(d, digits);
 }
 
 JNIEXPORT jstring JNICALL
-Java_com_gmail_fawkes_alex_scrollpi_math_NativeBbp_calculateFrom(
-        JNIEnv* const environment, const jclass, const int n, const int digits) {
-    return to_jstring(environment, bbp::calculate_from(n, digits));
+Java_com_gmail_fawkes_alex_scrollpi_math_NativeBbpAlgorithm_calculate(
+        JNIEnv* const environment,
+        const jclass,
+        const jint digits) {
+    return to_jstring(environment, bbp::string::calculate(digits));
 }
 
 JNIEXPORT jstring JNICALL
-Java_com_gmail_fawkes_alex_scrollpi_math_NativeBbp_calculateDigitsFrom(
-        JNIEnv* const environment, const jclass, const int n, const int digits) {
-    return to_jstring(environment, bbp::calculate_digits_from(n, digits));
+Java_com_gmail_fawkes_alex_scrollpi_math_NativeBbpAlgorithm_calculateFrom(
+        JNIEnv* const environment,
+        const jclass,
+        const jint n,
+        const jint digits) {
+    return to_jstring(environment, bbp::string::calculate_from(n, digits));
+}
+
+JNIEXPORT jstring JNICALL
+Java_com_gmail_fawkes_alex_scrollpi_math_NativeBbpAlgorithm_calculateDigitsFrom(
+        JNIEnv* const environment,
+        const jclass,
+        const jint n,
+        const jint digits) {
+    return to_jstring(environment, bbp::string::calculate_digits_from(n, digits));
 }
 }
