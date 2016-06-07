@@ -10,9 +10,9 @@ static jstring to_jstring(JNIEnv* const environment, const std::string& string) 
 
 extern "C" {
 JNIEXPORT jstring JNICALL
-Java_com_gmail_fawkes_alex_scrollpi_math_NativeBbp_calculateTo(
+Java_com_gmail_fawkes_alex_scrollpi_math_NativeBbp_calculate(
         JNIEnv* const environment, const jclass, const int digits) {
-    return to_jstring(environment, bbp::calculate_to(digits));
+    return to_jstring(environment, bbp::calculate(digits));
 }
 
 JNIEXPORT jstring JNICALL

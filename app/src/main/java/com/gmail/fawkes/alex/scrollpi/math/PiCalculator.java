@@ -3,7 +3,7 @@ package com.gmail.fawkes.alex.scrollpi.math;
 import java.math.BigDecimal;
 
 public interface PiCalculator {
-    BigDecimal calculateTo(int digits);
+    BigDecimal calculate(int digits);
 
     BigDecimal calculateFrom(int n, int digits);
 

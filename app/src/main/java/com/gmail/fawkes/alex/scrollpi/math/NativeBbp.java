@@ -8,7 +8,7 @@ class NativeBbp {
     private NativeBbp() {
     }
 
-    public static native String calculateTo(int digits);
+    public static native String calculate(int digits);
 
     public static native String calculateFrom(int n, int digits);
 

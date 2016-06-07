@@ -1,8 +1,6 @@
 package com.gmail.fawkes.alex.scrollpi.math;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
-import java.math.RoundingMode;
 
 /**
  * Calculates pi to an arbitrary number of digits using Bellard's formula:
@@ -26,111 +24,62 @@ import java.math.RoundingMode;
  * right6(n) =  1   / (10n + 9)
  * </pre>
  * <p/>
- * Wikipedia has this as 40% faster than Bailey–Borwein–Plouffe, but unlike BBP
- * it is not able to calculate digits independently of previous digits.
+ * Wikipedia has this as 40% faster than Bailey–Borwein–Plouffe, but unlike
+ * BBP it is not able to calculate digits independently of previous digits.
  */
-public class BellardCalculator implements PiCalculator {
-    private MathContext context = MathContext.DECIMAL128;
-
+public class BellardCalculator extends BaseCalculator {
     @Override
-    public BigDecimal calculateTo(final int digits) {
-        adjustPrecision(digits);
-
-        BigDecimal pi = big(0);
-        for (int i = 0; i < digits; ++i) {
-            pi = pi.add(calculateAddend(i));
-        }
-        return round(pi.multiply(calculateScale()), digits);
+    protected BigDecimal calculateAddend(final BigDecimal n) {
+        return left(n).multiply(right(n));
     }
 
     @Override
-    public BigDecimal calculateFrom(final int n, final int digits) {
-        return mod(calculateTo(n + digits), mask(n));
+    protected BigDecimal scaleSum(final BigDecimal sum) {
+        return sum.multiply(scale());
     }
 
-    @Override
-    public BigDecimal calculateDigitsFrom(final int n, final int digits) {
-        final BigDecimal scale = big(10).pow(n + digits - 1);
-        return calculateFrom(n, digits).multiply(scale).stripTrailingZeros();
+    private BigDecimal left(final BigDecimal n) {
+        return big(1).negate().pow(n.intValue()).multiply(invert(divisor(n)));
     }
 
-    private BigDecimal calculateScale() {
-        return big(1).divide(big(2).pow(6), context);
+    private BigDecimal divisor(final BigDecimal n) {
+        return big(2).pow(10).pow(n.intValue());
     }
 
-    private BigDecimal calculateLeft(final int n) {
-        return big(1).negate().pow(n).divide(big(2).pow(10).pow(n), context);
+    private BigDecimal right(final BigDecimal n) {
+        return right6(n).add(right5(n).add(right4(n).add(
+                right3(n).add(right2(n).add(right1(n).add(right0(n)))))));
     }
 
-    private BigDecimal calculateRight(final BigDecimal n) {
-        return calculateRight6(n).add(
-                calculateRight5(n).add(calculateRight4(n).add(
-                        calculateRight3(n).add(calculateRight2(n).add(
-                                calculateRight1(n).add(calculateRight0(n)))))));
+    private BigDecimal right0(final BigDecimal n) {
+        return big(2).pow(5).multiply(invert(big(4).multiply(n).add(big(1)))).negate();
     }
 
-    private BigDecimal calculateRight0(final BigDecimal n) {
-        return big(2).pow(5).divide(big(4).multiply(n).add(big(1)), context).negate();
+    private BigDecimal right1(final BigDecimal n) {
+        return big(1).multiply(invert(big(4).multiply(n).add(big(3)))).negate();
     }
 
-    private BigDecimal calculateRight1(final BigDecimal n) {
-        return big(1).divide(big(4).multiply(n).add(big(3)), context).negate();
+    private BigDecimal right2(final BigDecimal n) {
+        return big(2).pow(8).multiply(invert(big(10).multiply(n).add(big(1))));
     }
 
-    private BigDecimal calculateRight2(final BigDecimal n) {
-        return big(2).pow(8).divide(big(10).multiply(n).add(big(1)), context);
+    private BigDecimal right3(final BigDecimal n) {
+        return big(2).pow(6).multiply(invert(big(10).multiply(n).add(big(3)))).negate();
     }
 
-    private BigDecimal calculateRight3(final BigDecimal n) {
-        return big(2).pow(6).divide(big(10).multiply(n).add(big(3)), context).negate();
+    private BigDecimal right4(final BigDecimal n) {
+        return big(2).pow(2).multiply(invert(big(10).multiply(n).add(big(5)))).negate();
     }
 
-    private BigDecimal calculateRight4(final BigDecimal n) {
-        return big(2).pow(2).divide(big(10).multiply(n).add(big(5)), context).negate();
+    private BigDecimal right5(final BigDecimal n) {
+        return big(2).pow(2).multiply(invert(big(10).multiply(n).add(big(7)))).negate();
     }
 
-    private BigDecimal calculateRight5(final BigDecimal n) {
-        return big(2).pow(2).divide(big(10).multiply(n).add(big(7)), context).negate();
+    private BigDecimal right6(final BigDecimal n) {
+        return big(1).multiply(invert(big(10).multiply(n).add(big(9))));
     }
 
-    private BigDecimal calculateRight6(final BigDecimal n) {
-        return big(1).divide(big(10).multiply(n).add(big(9)), context);
-    }
-
-    private BigDecimal calculateAddend(final int n) {
-        return calculateLeft(n).multiply(calculateRight(big(n)));
-    }
-
-    private BigDecimal big(final int n) {
-        return new BigDecimal(n);
-    }
-
-    private BigDecimal mod(final BigDecimal n, final BigDecimal divisor) {
-        return n.divideAndRemainder(divisor, context)[1];
-    }
-
-    private BigDecimal invert(final BigDecimal n) {
-        return big(1).divide(n, context);
-    }
-
-    private BigDecimal round(final BigDecimal n, final int digits) {
-        if (digits < 1) {
-            return n;
-        }
-        return n.setScale(digits - 1, RoundingMode.DOWN);
-    }
-
-    private BigDecimal mask(final int digits) {
-        if (digits < 1) {
-            return big(10);
-        }
-        return invert(big(10).pow(digits - 1));
-    }
-
-    private void adjustPrecision(final int digits) {
-        final int precision = context.getPrecision();
-        if (digits > precision) {
-            context = new MathContext(digits, RoundingMode.HALF_EVEN);
-        }
+    private BigDecimal scale() {
+        return big(1).multiply(invert(big(2).pow(6)));
     }
 }

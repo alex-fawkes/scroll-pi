@@ -1,48 +1,41 @@
 package com.gmail.fawkes.alex.scrollpi.math;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
-import java.math.RoundingMode;
 
 
 /**
- * Implementation of Bailey–Borwein–Plouffe formula for calculating pi to
- * an arbitrary number of digits. BBP is a spigot algorithm, meaning it
- * can calculate any digit of pi without calculating preceding digits.
- * However, this is not the spigot version of the algorithm, but rather
- * a basic test implementation.
+ * Calculates pi to an arbitrary number of digits using the
+ * Bailey–Borwein–Plouffe formula:
+ * <p/>
+ * <pre>
+ * pi = sigma(n = 0, inf, addend(n))
+ *
+ * addend(n) = left(n) + right(n)
+ *
+ * left(n) = 1 / 16^n
+ *
+ * right(n) = right0(n) + right1(n) + right2(n) + right3(n)
+ *
+ * right0(n) =  4 / (8n + 1)
+ * right1(n) = -2 / (8n + 4)
+ * right2(n) = -1 / (8n + 5)
+ * right3(n) = -1 / (8n + 6)
+ * </pre>
+ * <p/>
+ * This is not the spigot form of the algorithm, which can calculate
+ * any digit of pi without calculating preceding digits.
  */
 // TODO: deduplicate versus bellard, native bpp_calculation
 // TODO: general cleanup
-public class BbpCalculator implements PiCalculator {
-    // TODO: adjustable precision
-    private final MathContext context = new MathContext(1024, RoundingMode.HALF_EVEN);
-
+public class BbpCalculator extends BaseCalculator {
     @Override
-    public BigDecimal calculateTo(final int digits) {
-        return pi(digits);
-    }
-
-    @Override
-    public BigDecimal calculateFrom(final int n, final int digits) {
-        return round(pi(n + digits).subtract(pi(n)), n + digits);
-    }
-
-    @Override
-    public BigDecimal calculateDigitsFrom(final int n, final int digits) {
-        return calculateFrom(n, digits).multiply(big(10).pow(n + digits - 1)).stripTrailingZeros();
-    }
-
-    private BigDecimal pi(final int n) {
-        BigDecimal pi = big(0);
-        for (int i = 0; i < n; ++i) {
-            pi = pi.add(addend(big(i)));
-        }
-        return round(pi, n);
-    }
-
-    private BigDecimal addend(final BigDecimal n) {
+    protected BigDecimal calculateAddend(final BigDecimal n) {
         return left(n).multiply(right(n));
+    }
+
+    @Override
+    protected BigDecimal scaleSum(final BigDecimal n) {
+        return n;
     }
 
     private BigDecimal left(final BigDecimal n) {
@@ -67,21 +60,5 @@ public class BbpCalculator implements PiCalculator {
 
     private BigDecimal right3(final BigDecimal n) {
         return invert(big(8).multiply(n).add(big(6))).negate();
-    }
-
-    private BigDecimal big(final int n) {
-        return new BigDecimal(n);
-    }
-
-    private BigDecimal invert(final BigDecimal n) {
-        return big(1).divide(n, context);
-    }
-
-    // TODO: use map where appropriate
-    private BigDecimal round(final BigDecimal n, final int digits) {
-        if (digits < 1) {
-            return n;
-        }
-        return n.setScale(digits - 1, RoundingMode.DOWN);
     }
 }

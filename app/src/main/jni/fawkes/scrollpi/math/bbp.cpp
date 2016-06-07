@@ -30,21 +30,21 @@ namespace fawkes {
                 static std::string string(const double d, const int digits);
 
                 // TODO: header etc.
-                static double calculate_to_double(const int n, const int digits) {
+                static double calculate_double(const int n, const int digits) {
                     return floating::trunc_front(floating::trunc(pi(digits), n + digits), n);
                 }
 
-                std::string calculate_to(const int digits) {
+                std::string calculate(const int digits) {
                     return string(pi(digits), digits);
                 }
 
                 std::string calculate_from(const int n, const int digits) {
-                    return string(calculate_to_double(n, digits), digits);
+                    return string(calculate_double(n, digits), digits);
                 }
 
                 std::string calculate_digits_from(const int n, const int digits) {
                     // TODO: functional pow?
-                    return string(calculate_to_double(n, digits) * std::pow(10.0, n + digits - 1),
+                    return string(calculate_double(n, digits) * std::pow(10.0, n + digits - 1),
                                   digits);
                 }
 

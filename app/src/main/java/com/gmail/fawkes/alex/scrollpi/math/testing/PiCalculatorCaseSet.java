@@ -15,14 +15,14 @@ public final class PiCalculatorCaseSet {
 
     public static Collection<PiCalculatorCase> getAllCases() {
         final ArrayList<PiCalculatorCase> cases = new ArrayList<>();
-        cases.addAll(CalculateTo.getAllCases());
+        cases.addAll(Calculate.getAllCases());
         cases.addAll(CalculateFrom.getAllCases());
         cases.addAll(CalculateDigitsFrom.getAllCases());
         return cases;
     }
 
-    public static final class CalculateTo {
-        private CalculateTo() {
+    public static final class Calculate {
+        private Calculate() {
         }
 
         public static Collection<PiCalculatorCase> getAllCases() {
@@ -56,7 +56,7 @@ public final class PiCalculatorCaseSet {
         }
 
         private static PiCalculatorCase make(String expected, int n) {
-            return new CalculateToCase(expected, n);
+            return new CalculateCase(expected, n);
         }
     }
 
@@ -137,5 +137,4 @@ public final class PiCalculatorCaseSet {
             return new CalculateDigitsFromCase(expected, n, digits);
         }
     }
-
 }
