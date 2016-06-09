@@ -14,47 +14,55 @@
 
 #include "algorithm.hpp"
 
-#include <boost/multiprecision/cpp_int.hpp>
-
 namespace fawkes {
     namespace scrollpi {
         namespace math {
             namespace bbp {
                 namespace algorithm {
-                    double pi(const int digits) {
-                        double pi(0.0);
-                        for (int i(0); i < digits; ++i) {
-                            pi += addend(static_cast<double>(i));
+                    rational pow(const rational& down_thing, const rational& up_thing) {
+                        rational power(1);
+                        for (rational i; i < up_thing; ++i) {
+                            power *= down_thing;
+                        }
+                        return power;
+                    }
+
+                    rational pi(const int digits) {
+                        const int accuracy_padded_digits(digits + digits * 4 / 3);
+
+                        rational pi(0);
+                        for (int i(0); i < accuracy_padded_digits; ++i) {
+                            pi += addend(rational(i));
                         }
                         return pi;
                     }
 
-                    double addend(const double index) {
+                    rational addend(const rational& index) {
                         return left(index) * right(index);
                     }
 
-                    double left(const double index) {
-                        return 1.0 / std::pow(16.0, index);
+                    rational left(const rational& index) {
+                        return rational(1) / pow(rational(16), index);
                     }
 
-                    double right(const double index) {
+                    rational right(const rational& index) {
                         return right0(index) + right1(index) + right2(index) + right3(index);
                     }
 
-                    double right0(const double index) {
-                        return 4.0 / (8.0 * index + 1.0);
+                    rational right0(const rational& index) {
+                        return rational(4) / (rational(8) * index + rational(1));
                     }
 
-                    double right1(const double index) {
-                        return -2.0 / (8.0 * index + 4.0);
+                    rational right1(const rational& index) {
+                        return rational(-2) / (rational(8) * index + rational(4));
                     }
 
-                    double right2(const double index) {
-                        return -1.0 / (8.0 * index + 5.0);
+                    rational right2(const rational& index) {
+                        return rational(-1) / (rational(8) * index + rational(5));
                     }
 
-                    double right3(const double index) {
-                        return -1.0 / (8.0 * index + 6.0);
+                    rational right3(const rational& index) {
+                        return rational(-1) / (rational(8) * index + rational(6));
                     }
                 }
             }

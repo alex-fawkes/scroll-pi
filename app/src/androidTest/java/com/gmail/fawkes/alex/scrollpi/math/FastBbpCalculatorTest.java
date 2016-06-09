@@ -41,4 +41,12 @@ public class FastBbpCalculatorTest extends ApplicationTestCase<Application> {
     public void testAllCases() throws Exception {
         runner.run(PiCalculatorCaseSet.getAllCases());
     }
+
+    @MediumTest
+    public void testTenThousandthDigits() throws Exception {
+        // 95968 81592 05600 10165 52563 7567 (10001th)
+        assertEquals("95968815920560010165525637567", NativeBbpAlgorithm.calculateDigitsFrom(10000 - 25 - 4 + 1, 25 + 4));
+    }
+
+
 }

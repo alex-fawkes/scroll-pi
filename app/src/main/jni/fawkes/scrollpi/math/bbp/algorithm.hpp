@@ -19,26 +19,30 @@
 #ifndef FAWKES_SCROLLPI_MATH_BBP_ALGORITHM_HPP
 #define FAWKES_SCROLLPI_MATH_BBP_ALGORITHM_HPP
 
+#include <boost/multiprecision/cpp_int.hpp>
+
 namespace fawkes {
     namespace scrollpi {
         namespace math {
             namespace bbp {
                 namespace algorithm {
-                    double pi(const int digits);
+                    typedef boost::multiprecision::cpp_rational rational;
 
-                    double addend(const double index);
+                    rational pi(const int digits);
 
-                    double left(const double index);
+                    rational addend(const rational& index);
 
-                    double right(const double index);
+                    rational left(const rational& index);
 
-                    double right0(const double index);
+                    rational right(const rational& index);
 
-                    double right1(const double index);
+                    rational right0(const rational& index);
 
-                    double right2(const double index);
+                    rational right1(const rational& index);
 
-                    double right3(const double index);
+                    rational right2(const rational& index);
+
+                    rational right3(const rational& index);
                 }
             }
         }

@@ -16,6 +16,7 @@ model {
         ndk {
             moduleName 'fawkes'
             toolchain = 'clang'
+            cppFlags.add('-frtti')
             cppFlags.add('-fexceptions')
             cppFlags.add('-Wall')
             cppFlags.add('-I' + boostRoot())

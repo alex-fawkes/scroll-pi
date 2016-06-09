@@ -3,5 +3,6 @@
 /local.properties
 /.idea/libraries
 /.idea/workspace.xml
+/.idea/shelf
+/.idea/misc.xml
 /build
-.idea/misc.xml
