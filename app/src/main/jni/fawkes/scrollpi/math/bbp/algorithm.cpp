@@ -14,7 +14,7 @@
 
 #include "algorithm.hpp"
 
-#include <cmath>
+#include <boost/multiprecision/cpp_int.hpp>
 
 namespace fawkes {
     namespace scrollpi {

@@ -16,7 +16,9 @@ model {
         ndk {
             moduleName 'fawkes'
             toolchain = 'clang'
-            CFlags.addAll(['-Wall'])
+            cppFlags.add('-fexceptions')
+            cppFlags.add('-Wall')
+            cppFlags.add('-I' + boostRoot())
             stl 'stlport_static'
         }
 
@@ -32,4 +34,19 @@ model {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
+}
+
+// app developed and tested with boost version 1.6.10 only
+def boostRoot() {
+    if (System.env.BOOST_ROOT != null)
+        return System.env.BOOST_ROOT
+
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+    def root = properties.getProperty('boost.root', null)
+    if (root == null)
+        throw new GradleException('This project requires Boost C++ libraries.' +
+                ' Define location with boost.root in local.properties' +
+                ' or with a BOOST_ROOT environment variable.')
+    return root
 }
