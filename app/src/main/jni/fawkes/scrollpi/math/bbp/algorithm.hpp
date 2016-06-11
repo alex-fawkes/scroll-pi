@@ -19,30 +19,45 @@
 #ifndef FAWKES_SCROLLPI_MATH_BBP_ALGORITHM_HPP
 #define FAWKES_SCROLLPI_MATH_BBP_ALGORITHM_HPP
 
-#include <boost/multiprecision/cpp_int.hpp>
+#include "../precision.hpp"
 
 namespace fawkes {
     namespace scrollpi {
         namespace math {
             namespace bbp {
                 namespace algorithm {
-                    typedef boost::multiprecision::cpp_rational rational;
+                    precision::rational pi(const int digits);
 
-                    rational pi(const int digits);
+                    precision::rational addend(const precision::rational& index);
 
-                    rational addend(const rational& index);
+                    precision::rational left(const precision::rational& index);
 
-                    rational left(const rational& index);
+                    precision::rational right(const precision::rational& index);
 
-                    rational right(const rational& index);
+                    precision::rational right0(const precision::rational& index);
 
-                    rational right0(const rational& index);
+                    precision::rational right1(const precision::rational& index);
 
-                    rational right1(const rational& index);
+                    precision::rational right2(const precision::rational& index);
 
-                    rational right2(const rational& index);
+                    precision::rational right3(const precision::rational& index);
 
-                    rational right3(const rational& index);
+
+
+
+
+
+
+
+                    precision::rational calculate(const int digits);
+
+                    precision::rational trunc_pi_digits(const precision::rational& pi, const int index, const int digits);
+
+                    precision::rational calculate_from(const int index, const int digits);
+
+                    precision::rational shift_pi_digits(const precision::rational& pi, const int index, const int digits);
+
+                    precision::rational calculate_digits_from(const int index, const int digits);
                 }
             }
         }

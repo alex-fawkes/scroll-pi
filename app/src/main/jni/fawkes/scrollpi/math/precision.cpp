@@ -12,42 +12,68 @@
 // ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR
 // IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-#ifndef FAWKES_SCROLLPI_MATH_PRECISION_HPP
-#define FAWKES_SCROLLPI_MATH_PRECISION_HPP
-
-#include <boost/multiprecision/cpp_dec_float.hpp>
-#include <boost/multiprecision/cpp_int.hpp>
-#include <boost/multiprecision/number.hpp>
+#include "precision.hpp"
 
 namespace fawkes {
     namespace scrollpi {
         namespace math {
             namespace precision {
-                using namespace boost::multiprecision;
-
-                namespace detail {
-                    typedef boost::multiprecision::cpp_int_backend<> cpp_int_backend;
-                    typedef boost::multiprecision::cpp_dec_float<8192> cpp_dec_float;
+                rational pow(const rational& base, const int exponent) {
+                    return pow(base, rational(exponent));
                 }
 
-                typedef boost::multiprecision::number<detail::cpp_int_backend> integer;
-                typedef boost::multiprecision::number<detail::cpp_dec_float> floating;
-                typedef boost::multiprecision::cpp_rational rational;
+                rational pow(const rational& base, const integer& exponent) {
+                    rational power(1);
+                    for (integer i; i < exponent; ++i) {
+                        power *= base;
+                    }
+                    return power;
+                }
 
-//                template <typename integer_type, typename rational_type>
-//                integer_type numerator(const rational_type& value) {
-//                    return boost::multiprecision::numerator(value);
-//                }
-//
-//                template <typename integer_type, typename rational_type>
-//                integer_type denominator(const rational_type& value) {
-//                    return boost::multiprecision::denominator(value);
-//                }
+                rational pow(const rational& base, const rational& exponent) {
+                    using boost::multiprecision::numerator;
+                    using boost::multiprecision::denominator;
+                    return pow(base, integer(numerator(exponent) / denominator(exponent)));
+                }
 
-                rational pow(const rational& base, const rational& exponent);
+
+
+
+
+
+
+                integer mod(const rational& left, const rational& right) {
+                    // duplicated elsewhere
+                    using boost::multiprecision::numerator;
+                    using boost::multiprecision::denominator;
+
+                    const integer left_integer(numerator(left) / denominator(left));
+                    const integer right_integer(numerator(right) / denominator(right));
+                    return left_integer - ((left_integer / right_integer) * right_integer);
+                }
+
+                rational trunc(const rational& value, const int digits) {
+                    const int truncated(static_cast<int>(decimal_shift_left(value, digits)));
+                    return decimal_shift_right(truncated, digits);
+                }
+
+                rational trunc_front(const rational& value, const int digits) {
+                    return mod(value, pow(10, digits));
+                }
+
+                rational trunc_both(const rational& value,
+                                  const int front_digits, const int back_digits) {
+                    return trunc(trunc_front(value, front_digits), back_digits);
+                }
+
+                rational decimal_shift_left(const rational& value, const int digits) {
+                    return value * pow(10, digits);
+                }
+
+                rational decimal_shift_right(const rational& value, const int digits) {
+                    return decimal_shift_left(value, -digits);
+                }
             }
         }
     }
 }
-
-#endif

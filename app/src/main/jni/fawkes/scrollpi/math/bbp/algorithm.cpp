@@ -19,13 +19,7 @@ namespace fawkes {
         namespace math {
             namespace bbp {
                 namespace algorithm {
-                    rational pow(const rational& down_thing, const rational& up_thing) {
-                        rational power(1);
-                        for (rational i; i < up_thing; ++i) {
-                            power *= down_thing;
-                        }
-                        return power;
-                    }
+                    using precision::rational;
 
                     rational pi(const int digits) {
                         const int accuracy_padded_digits(digits + digits * 4 / 3);
@@ -42,6 +36,7 @@ namespace fawkes {
                     }
 
                     rational left(const rational& index) {
+                        using precision::pow;
                         return rational(1) / pow(rational(16), index);
                     }
 
@@ -63,6 +58,35 @@ namespace fawkes {
 
                     rational right3(const rational& index) {
                         return rational(-1) / (rational(8) * index + rational(6));
+                    }
+
+
+
+
+
+
+
+
+
+
+                    rational calculate(const int digits) {
+                        return pi(digits);
+                    }
+
+                    rational trunc_pi_digits(const rational& pi, const int index, const int digits) {
+                        return precision::trunc_both(pi, 1 - index, index + digits + 1);
+                    }
+
+                    rational calculate_from(const int index, const int digits) {
+                        return trunc_pi_digits(bbp::algorithm::pi(digits), index, digits);
+                    }
+
+                    rational shift_pi_digits(const rational& pi, const int index, const int digits) {
+                        return precision::decimal_shift_left(pi, index + digits - 1);
+                    }
+
+                    rational calculate_digits_from(const int index, const int digits) {
+                        return shift_pi_digits(calculate_from(index, digits), index, digits);
                     }
                 }
             }

@@ -16,13 +16,14 @@
 
 #include "algorithm.hpp"
 
-#include <boost/multiprecision/cpp_dec_float.hpp>
-
 namespace fawkes {
     namespace scrollpi {
         namespace math {
             namespace bbp {
                 namespace string {
+                    using precision::integer;
+                    using precision::rational;
+
                     template<typename container_type>
                     void erase_decimal_point(container_type& container) {
                         typedef typename container_type::iterator iterator;
@@ -103,35 +104,63 @@ namespace fawkes {
 
 
 
-                    static std::string stringify(const algorithm::rational& value);
+                    static std::string stringify(const rational& value);
+
+                    integer mod(const rational& left, const rational& right) {
+                        // duplicated elsewhere
+                        using boost::multiprecision::numerator;
+                        using boost::multiprecision::denominator;
+
+                        const integer left_integer(numerator(left) / denominator(left));
+                        const integer right_integer(numerator(right) / denominator(right));
+                        return left_integer - ((left_integer / right_integer) * right_integer);
+                    }
 
                     std::string calculate(const int digits) {
-                        std::string pi(stringify(algorithm::pi(digits)));
-                        erase_decimal_point(pi);
-                        truncate(pi, digits);
-                        insert_decimal_point(pi);
-                        return pi;
+//                        std::string pi(calculate_from(0, digits));
+//                        return pi;
+                        return stringify(algorithm::calculate(digits));
                     }
 
                     std::string calculate_from(const int index, const int digits) {
-                        std::string pi(stringify(algorithm::pi(digits)));
-                        erase_decimal_point(pi);
-                        truncate(pi, index, digits);
-                        for (int i(0); i < index; ++i) {
-                            pi[i] = '0';
-                        }
-                        insert_decimal_point(pi);
-                        return pi;
-//                        return stringify(double_type::calculate_from(index, digits), digits);
+//                        if (index == 0) {
+//                            std::string pi(calculate_digits_from(index, digits));
+//                            insert_decimal_point(pi);
+//                            return pi;
+//                        }
+//
+//                        std::stringstream stream;
+//                        for (int i(0); i < index; ++i) {
+//                            stream << '0';
+//                        }
+//                        stream << calculate_digits_from(index, digits);
+//
+//                        std::string pi(stream.str());
+//                        insert_decimal_point(pi);
+//                        return pi;
+                        return stringify(algorithm::calculate_from(index, digits));
                     }
 
                     std::string calculate_digits_from(const int index, const int digits) {
-                        std::string pi(stringify(algorithm::pi(digits)));
+//                        using precision::pow;
+//
+//                        const rational shift(pow(rational(10), index + digits - 1));
+//                        const rational shifted(shift * algorithm::pi(digits));
+//                        const rational mask(pow(rational(10), index));
+//                        const integer modded(mod(shifted, mask));
+//
+//                        std::stringstream stream;
+//                        stream << std::setprecision(128) << modded;
+//                        return stream.str();
+
+
+//                        std::string pi(stringify(algorithm::pi(digits)));
 //                        erase_decimal_point(pi);
 //                        truncate(pi, index, digits);
 //                        truncate_front(pi, index);
-                        return pi;
+//                        return pi;
 //                        return stringify(double_type::calculate_digits_from(index, digits), digits);
+                        return stringify(algorithm::calculate_digits_from(index, digits));
                     }
 
                     std::string stringify(const double value, const int digits) {
@@ -140,17 +169,18 @@ namespace fawkes {
                         return stream.str();
                     }
 
-                    std::string stringify(const algorithm::rational& value) {
-                        const int bit_width(4096);
-                        typedef boost::multiprecision::cpp_dec_float<4096> dec_float;
-                        typedef boost::multiprecision::number<dec_float> number;
-
-                        const number numerator(boost::multiprecision::numerator(value));
-                        const number denominator(boost::multiprecision::denominator(value));
-                        const number evaluated(numerator / denominator);
+                    std::string stringify(const rational& value) {
+//                        const int bit_width(4096);
+//                        typedef boost::multiprecision::cpp_dec_float<4096> dec_float;
+//                        typedef boost::multiprecision::number<dec_float> number;
+//
+//                        const number numerator(boost::multiprecision::numerator(value));
+//                        const number denominator(boost::multiprecision::denominator(value));
+//                        const number evaluated(numerator / denominator);
 
                         std::stringstream stream;
-                        stream << std::setprecision(bit_width) << evaluated;
+//                        stream << std::setprecision(bit_width) << evaluated;
+                        stream << value;
                         return stream.str();
                     }
                 }

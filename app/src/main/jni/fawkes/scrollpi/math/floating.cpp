@@ -14,6 +14,8 @@
 
 #include "floating.hpp"
 
+#include "precision.hpp"
+
 #include <cmath>
 
 namespace fawkes {
