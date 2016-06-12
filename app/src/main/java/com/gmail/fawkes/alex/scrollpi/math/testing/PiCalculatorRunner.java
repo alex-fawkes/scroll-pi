@@ -28,6 +28,7 @@ import java.util.List;
  * to identify all failed tests.
  */
 public class PiCalculatorRunner {
+    // TODO: this class can be removed and the cases simplified back into basic unit tests
     private final PiCalculator calculator;
 
     public PiCalculatorRunner(final PiCalculator calculator) {
