@@ -23,9 +23,6 @@ import java.math.RoundingMode;
 public abstract class BaseCalculator implements PiCalculator {
     private MathContext context = MathContext.DECIMAL128;
 
-    public BaseCalculator() {
-    }
-
     @Override
     public final BigDecimal calculate(final int digits) {
         calibrate(digits);

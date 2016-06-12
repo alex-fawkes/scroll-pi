@@ -20,7 +20,7 @@ import java.math.BigDecimal;
 
 /**
  * Calculates pi to an arbitrary number of digits using Bellard's formula:
- * <p>
+ * <p/>
  * <pre>
  * pi = scale * sigma(n = 0, inf, addend(n))
  *
@@ -39,7 +39,7 @@ import java.math.BigDecimal;
  * right5(n) = -2^2 / (10n + 7)
  * right6(n) =  1   / (10n + 9)
  * </pre>
- * <p>
+ * <p/>
  * Wikipedia has this as 40% faster than Bailey–Borwein–Plouffe, but unlike
  * BBP it is not able to calculate digits independently of previous digits.
  */

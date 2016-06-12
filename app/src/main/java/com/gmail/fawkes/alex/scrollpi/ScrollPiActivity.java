@@ -21,7 +21,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.gmail.fawkes.alex.scrollpi.math.NativeBbpBailey;
+import com.gmail.fawkes.alex.scrollpi.math.NativeBbp;
 
 public class ScrollPiActivity extends Activity {
     private int digitsDisplayed;
@@ -46,7 +46,7 @@ public class ScrollPiActivity extends Activity {
         final int digits = 8;
         digitsDisplayed += digits;
 
-        final String text = NativeBbpBailey.calculateHexDigitsFrom(index, digits);
+        final String text = NativeBbp.calculateHexDigitsFrom(index, digits);
         if (index == 0) {
             return "0x" + text;
         }
@@ -58,15 +58,14 @@ public class ScrollPiActivity extends Activity {
         public void run() {
             try {
                 waitForGuiLoad();
-
-                loop();
             } catch (final InterruptedException exception) {
-                // stop
+                // continue
             }
+            loop();
         }
 
         @SuppressWarnings("InfiniteLoopStatement") // threaded infinite pi calculation
-        private void loop() throws InterruptedException {
+        private void loop() {
             while (true) {
                 displayPiDigits();
             }

@@ -22,7 +22,7 @@ static jstring jstringify(JNIEnv* const environment, const std::string& string) 
 
 extern "C" {
 JNIEXPORT jstring JNICALL
-Java_com_gmail_fawkes_alex_scrollpi_math_NativeBbpBailey_calculateHexDigitsFrom(
+Java_com_gmail_fawkes_alex_scrollpi_math_NativeBbp_calculateHexDigitsFrom(
         JNIEnv* const environment,
         const jclass,
         const jlong index,

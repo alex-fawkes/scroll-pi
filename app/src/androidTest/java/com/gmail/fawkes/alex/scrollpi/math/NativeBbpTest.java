@@ -20,8 +20,8 @@ import android.app.Application;
 import android.test.ApplicationTestCase;
 import android.test.suitebuilder.annotation.MediumTest;
 
-public class NativeBbpBaileyTest extends ApplicationTestCase<Application> {
-    public NativeBbpBaileyTest() {
+public class NativeBbpTest extends ApplicationTestCase<Application> {
+    public NativeBbpTest() {
         super(Application.class);
     }
 
@@ -105,23 +105,19 @@ public class NativeBbpBaileyTest extends ApplicationTestCase<Application> {
         test8BackFrom("ffd34236", 1000000);
     }
 
-    private void test(String expected, long index, long digits) {
-        assertEquals(expected, NativeBbpBailey.calculateHexDigitsFrom(index, digits));
+    private void test8From(String expected, long index) {
+        test(expected, index, 8);
     }
 
-    private void testFrom(String expected, long index, long digits) {
-        test(expected, index, digits);
+    private void test8BackFrom(String expected, long index) {
+        testBackFrom(expected, index, 8);
     }
 
     private void testBackFrom(String expected, long index, long digits) {
         test(expected, index - digits, digits);
     }
 
-    private void test8From(String expected, long index) {
-        testFrom(expected, index, 8);
-    }
-
-    private void test8BackFrom(String expected, long index) {
-        testBackFrom(expected, index, 8);
+    private void test(String expected, long index, long digits) {
+        assertEquals(expected, NativeBbp.calculateHexDigitsFrom(index, digits));
     }
 }

@@ -55,7 +55,7 @@ class AppendTextView implements Runnable {
 
     private int getTruncatedStartIndex() {
         // force truncation to a multiple of line length to prevent tearing
-        final int width =  measureLineWidth();
+        final int width = measureLineWidth();
         return textLength() / 4 / width * width;
     }
 

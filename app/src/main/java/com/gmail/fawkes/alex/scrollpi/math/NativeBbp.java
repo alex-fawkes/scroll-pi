@@ -16,12 +16,12 @@
 
 package com.gmail.fawkes.alex.scrollpi.math;
 
-public class NativeBbpBailey {
+public class NativeBbp {
     static {
         System.loadLibrary("fawkes");
     }
 
-    private NativeBbpBailey() {
+    private NativeBbp() {
     }
 
     public static native String calculateHexDigitsFrom(long index, long digits);
