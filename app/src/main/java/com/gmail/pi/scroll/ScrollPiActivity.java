@@ -73,11 +73,6 @@ public class ScrollPiActivity extends Activity {
     private class Loop implements Runnable {
         @Override
         public void run() {
-            try {
-                waitForGuiLoad();
-            } catch (final InterruptedException exception) {
-                // continue
-            }
             loop();
         }
 
@@ -86,10 +81,6 @@ public class ScrollPiActivity extends Activity {
             while (true) {
                 displayPiDigits();
             }
-        }
-
-        private void waitForGuiLoad() throws InterruptedException {
-            Thread.sleep(1000);
         }
     }
 }
