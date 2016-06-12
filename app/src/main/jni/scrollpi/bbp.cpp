@@ -16,8 +16,8 @@
 /// Implementation of BBP spigot algorithm derived from work by David H. Bailey:
 /// @see http://www.experimentalmath.info/bbp-codes/piqpr8.c
 ///
-/// This logic is minimally optimized and runs slowly. Calculates 8 digits at
-/// the millionths place in 25 seconds on an Intel i5-3450S in the emulator.
+/// This logic is somewhat optimized. Calculates 8 digits at the millionths place
+/// in 5.7 seconds on an Intel i5-3450S in the emulator.
 
 #include "bbp.hpp"
 

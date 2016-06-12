@@ -21,33 +21,23 @@
 #include <string>
 #include <vector>
 
+/// Perform fmod 150% faster than std::fmod and 70% faster than inline or template function.
+#define SCROLLPI_MATH_FAST_FMOD_LONG(numerator, divisor) \
+    (numerator) - static_cast<long>((numerator) / (divisor)) * (divisor)
+
 namespace scrollpi {
     namespace math {
-        /// First thirty two powers of two.
-        extern const std::vector<long double> bin_powers_32;
-
-        long double pow(const long base, const long exponent);
-
-        long double mod(const long double numerator, const long double modulus);
-
         /// Round down to the nearest multiple of the specified value.
         long floor(const long value, const long multiple);
 
         long double fractional(const long double value);
 
         /// Find the exponent for the first binary power greater than the specified value.
-        /// Works up to the thirty second power of two.
-        long next_bin_exponent_32(const long double value);
+        /// Supports values up to 2^95.
+        long next_bin_exponent(const long double value);
 
-        std::vector<long double> calculate_bin_powers(const long count);
-
-        /// Calculate the nth power of 16 modulus m using binary exponentiation.
-        long double pow_hex_mod(const long double exponent, const long double modulus);
-
-        long double pow_hex_mod(long double accumulated,
-                                long double remaining,
-                                const long double modulus,
-                                long double bin_exponent);
+        /// Calculate 16^n % m using binary exponentiation.
+        long double pow_hex_mod(long double exponent, const long double modulus);
 
         /// Check if two long double values are effectively equal.
         /// @see https://randomascii.wordpress.com/2012/02/25/comparing-floating-point-numbers-2012-edition/

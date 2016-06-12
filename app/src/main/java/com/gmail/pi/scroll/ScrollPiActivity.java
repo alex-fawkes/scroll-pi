@@ -72,7 +72,7 @@ public class ScrollPiActivity extends Activity {
         }
 
         private void waitForGuiLoad() throws InterruptedException {
-            Thread.sleep(500);
+            Thread.sleep(1000);
         }
     }
 }
