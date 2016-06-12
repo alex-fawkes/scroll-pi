@@ -24,6 +24,8 @@ import android.widget.TextView;
 import com.gmail.pi.scroll.math.NativeBbp;
 
 public class ScrollPiActivity extends Activity {
+    private StringBuilder buffer = new StringBuilder();
+    private long lastUpdateTimeMillis;
     private int digitsDisplayed;
 
     @Override
@@ -36,8 +38,11 @@ public class ScrollPiActivity extends Activity {
     private void displayPiDigits() {
         View view = findViewById(R.id.textView);
         if (view instanceof TextView) {
-            final String text = calculateNextPiDigits();
-            view.post(new AppendTextView((TextView) view, text));
+            buffer.append(calculateNextPiDigits());
+            if (isUpdateTime()) {
+                lastUpdateTimeMillis = System.currentTimeMillis();
+                view.post(new AppendTextView((TextView) view, flushBuffer()));
+            }
         }
     }
 
@@ -51,6 +56,18 @@ public class ScrollPiActivity extends Activity {
             return "0x" + text;
         }
         return text;
+    }
+
+    private boolean isUpdateTime() {
+        final long updateIntervalMillis = 250;
+        final long elapsed = System.currentTimeMillis() - lastUpdateTimeMillis;
+        return elapsed >= updateIntervalMillis;
+    }
+
+    private String flushBuffer() {
+        final String content = buffer.toString();
+        buffer.setLength(0);
+        return content;
     }
 
     private class Loop implements Runnable {
