@@ -19,7 +19,7 @@ package com.gmail.fawkes.alex.scrollpi;
 import android.widget.TextView;
 
 class AppendTextView implements Runnable {
-    private static final int LINE_COUNT_LIMIT = 2000;
+    private static final int TEXT_LENGTH_LIMIT = 2000;
     private final TextView view;
     private final String text;
 
@@ -38,26 +38,36 @@ class AppendTextView implements Runnable {
     }
 
     private void truncateFront() {
-        view.setText(getTrailingLines());
+        view.setText(getTrailingText());
     }
 
     private boolean isTooLong() {
-        return countLines() > LINE_COUNT_LIMIT;
+        return textLength() > TEXT_LENGTH_LIMIT;
     }
 
-    private int countLines() {
+    private int textLength() {
         return view.getText().length();
     }
 
-    private CharSequence getTrailingLines() {
-        return view.getText().subSequence(getTruncatedStartIndex(), countLines());
-    }
-
-    private int getTruncatedLineCount() {
-        return LINE_COUNT_LIMIT * 3 / 4;
+    private CharSequence getTrailingText() {
+        return view.getText().subSequence(getTruncatedStartIndex(), textLength());
     }
 
     private int getTruncatedStartIndex() {
-        return countLines() - getTruncatedLineCount();
+        // force truncation to a multiple of line length to prevent tearing
+        final int width =  measureLineWidth();
+        return textLength() / 4 / width * width;
+    }
+
+    /**
+     * Measure line width in characters.
+     */
+    private int measureLineWidth() {
+        // not exactly elegant, but works reliably and is not called often
+        String ruler = "";
+        while (view.getPaint().measureText(ruler) <= view.getMeasuredWidth()) {
+            ruler += '-';
+        }
+        return Math.max(ruler.length() - 1, 0);
     }
 }

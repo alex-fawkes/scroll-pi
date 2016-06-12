@@ -22,7 +22,7 @@ model {
 
         buildTypes {
             release {
-                minifyEnabled false
+                minifyEnabled true
                 proguardFiles.add(file('proguard-android.txt'))
             }
         }

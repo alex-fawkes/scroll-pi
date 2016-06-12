@@ -36,5 +36,6 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:gravity="start|bottom"
-        android:textAppearance="?android:attr/textAppearanceMedium"/>
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:typeface="monospace"/>
 </RelativeLayout>

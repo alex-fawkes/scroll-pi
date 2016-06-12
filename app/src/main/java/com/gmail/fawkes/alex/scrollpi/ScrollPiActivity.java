@@ -21,12 +21,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import java.util.Random;
-
-import static com.gmail.fawkes.alex.scrollpi.utilities.Utilities.string;
+import com.gmail.fawkes.alex.scrollpi.math.NativeBbpBailey;
 
 public class ScrollPiActivity extends Activity {
-    private static final Random random = new Random();
+    private int digitsDisplayed;
 
     @Override
     protected void onCreate(final Bundle state) {
@@ -35,27 +33,32 @@ public class ScrollPiActivity extends Activity {
         new Thread(new Loop()).start();
     }
 
-    private void displayRandomDigits() {
+    private void displayPiDigits() {
         View view = findViewById(R.id.textView);
         if (view instanceof TextView) {
-            final String text = getRandomDigits();
+            final String text = calculateNextPiDigits();
             view.post(new AppendTextView((TextView) view, text));
         }
     }
 
-    private String getRandomDigits() {
-        final StringBuilder text = new StringBuilder();
-        for (int i = 0; i < 100; ++i) {
-            final int digit = random.nextInt(10);
-            text.append(string(digit));
+    private String calculateNextPiDigits() {
+        final int index = digitsDisplayed;
+        final int digits = 8;
+        digitsDisplayed += digits;
+
+        final String text = NativeBbpBailey.calculateHexDigitsFrom(index, digits);
+        if (index == 0) {
+            return "0x" + text;
         }
-        return text.toString();
+        return text;
     }
 
     private class Loop implements Runnable {
         @Override
         public void run() {
             try {
+                waitForGuiLoad();
+
                 loop();
             } catch (final InterruptedException exception) {
                 // stop
@@ -65,9 +68,12 @@ public class ScrollPiActivity extends Activity {
         @SuppressWarnings("InfiniteLoopStatement") // threaded infinite pi calculation
         private void loop() throws InterruptedException {
             while (true) {
-                displayRandomDigits();
-                Thread.sleep(10);
+                displayPiDigits();
             }
+        }
+
+        private void waitForGuiLoad() throws InterruptedException {
+            Thread.sleep(500);
         }
     }
 }
