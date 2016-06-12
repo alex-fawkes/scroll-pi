@@ -80,8 +80,7 @@ namespace scrollpi {
                 return true;
             }
             const long double greatest(std::max(std::abs(left), std::abs(right)));
-            return delta <= greatest * max_relative_delta<long
-            double>();
+            return delta <= greatest * max_relative_delta<long double>();
         }
 
         char hex_digit(const long value) {
