@@ -43,7 +43,7 @@ public class ScrollPiActivity extends Activity {
 
     private String calculateNextPiDigits() {
         final int index = digitsDisplayed;
-        final int digits = 8;
+        final int digits = 16;
         digitsDisplayed += digits;
 
         final String text = NativeBbp.calculateHexDigitsFrom(index, digits);

@@ -1,8 +1,9 @@
-*.iml
-.gradle
-/local.properties
-/.idea/libraries
-/.idea/shelf
+/.idea/libraries/
+/.idea/shelf/
+/.idea/misc.xml
 /.idea/workspace.xml
-/build
-.idea/misc.xml
+*.iml
+
+/build/
+local.properties
+.gradle
