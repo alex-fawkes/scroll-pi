@@ -16,7 +16,7 @@
 
 package com.gmail.fawkes.alex.scrollpi.math;
 
-class NativeBbpBailey {
+public class NativeBbpBailey {
     static {
         System.loadLibrary("fawkes");
     }

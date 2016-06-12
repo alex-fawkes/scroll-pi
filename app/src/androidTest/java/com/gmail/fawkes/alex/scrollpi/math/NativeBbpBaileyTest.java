@@ -36,8 +36,23 @@ public class NativeBbpBaileyTest extends ApplicationTestCase<Application> {
     }
 
     @MediumTest
+    public void test8From4() throws Exception {
+        test8From("f6a8885a", 4);
+    }
+
+    @MediumTest
+    public void test8From8() throws Exception {
+        test8From("885a308d", 8);
+    }
+
+    @MediumTest
     public void test8BackFrom100() throws Exception {
         test8BackFrom("90c6cc0a", 100);
+    }
+
+    @MediumTest
+    public void test36BackFrom50() throws Exception {
+        testBackFrom("8d313198a2e03707344a4093822299f31d00", 50, 36);
     }
 
     @MediumTest
@@ -71,8 +86,18 @@ public class NativeBbpBaileyTest extends ApplicationTestCase<Application> {
     }
 
     @MediumTest
+    public void test36BackFrom10000() throws Exception {
+        testBackFrom("3ee0b5e57368f6c79f4bb7a595926aab49ec", 10000, 36);
+    }
+
+    @MediumTest
     public void test8BackFrom100000() throws Exception {
         test8BackFrom("22673c1a", 100000);
+    }
+
+    @MediumTest
+    public void test36BackFrom100000() throws Exception {
+        testBackFrom("58b3e62e612bc302ec487aa9a6ea22673c1a", 100000, 36);
     }
 
     @MediumTest

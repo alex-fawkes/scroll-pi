@@ -29,6 +29,10 @@
 namespace fawkes {
     namespace scrollpi {
         namespace bbp {
+            static void trim_left(std::string& string, const long count);
+
+            static void trim_right(std::string& string, const long count);
+
             std::string calculate_hex_digits_from(const long index, const long digits) {
                 if (index == 0L) {
                     std::string hex(calculate_fractional_hex_digits_from(index, digits));
@@ -39,12 +43,23 @@ namespace fawkes {
             }
 
             std::string calculate_fractional_hex_digits_from(const long index, const long digits) {
+                std::string hex;
+                for (long i(math::floor(index, 8L)); i < index + digits; i += 8L) {
+                    hex += calculate_fractional_hex_digits_8_from(i);
+                }
+                trim_left(hex, index % 8L);
+                trim_right(hex, hex.size() % digits);
+                return hex;
+            }
+
+            std::string calculate_fractional_hex_digits_8_from(const long index) {
                 const long double s1(series(index, 1L));
                 const long double s2(series(index, 4L));
                 const long double s3(series(index, 5L));
                 const long double s4(series(index, 6L));
                 const long double pi(math::fractional(4.0L * s1 - 2.0L * s2 - s3 - s4) + 1.0L);
-                return math::hex_string(pi, digits);
+                return math::hex_string(pi, 8);
+
             }
 
             long double series(const long index, const long m) {
@@ -89,6 +104,26 @@ namespace fawkes {
                     return accumulated;
                 }
                 return series_additional(math::fractional(accumulated + term), index, m, k + 1);
+            }
+
+            static void trim_left(std::string& string, const long count) {
+                if (!string.empty()) {
+                    if (count > 0) {
+                        typedef std::string::iterator iterator_type;
+                        const iterator_type first(std::min(string.begin() + count, string.end()));
+                        string.erase(string.begin(), first);
+                    }
+                }
+            }
+
+            static void trim_right(std::string& string, const long count) {
+                if (!string.empty()) {
+                    if (count > 0) {
+                        typedef std::string::iterator iterator_type;
+                        const iterator_type last(std::max(string.end() - count, string.begin()));
+                        string.erase(last, string.end());
+                    }
+                }
             }
         }
     }

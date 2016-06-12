@@ -27,6 +27,9 @@ namespace fawkes {
 
             long double mod(const long double numerator, const long double modulus);
 
+            /// Round down to the nearest multiple of the specified value.
+            long floor(const long value, const long multiple);
+
             long double fractional(const long double value);
 
             /// Find the exponent for the first binary power greater than the specified value.

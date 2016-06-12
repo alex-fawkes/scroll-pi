@@ -26,6 +26,9 @@ namespace fawkes {
             /// Zero index starts at tenths place.
             std::string calculate_fractional_hex_digits_from(const long index, const long digits);
 
+            // Eight digits form a "batch" as the limit of accuracy during a single round.
+            std::string calculate_fractional_hex_digits_8_from(const long index);
+
             /// Evaluate the series sum(k = 0, infinity, 16^(index - k) / (8 * k + m)
             /// using the modular exponentiation technique.
             long double series(const long index, const long m);

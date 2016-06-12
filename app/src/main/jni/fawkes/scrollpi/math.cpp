@@ -27,6 +27,10 @@ namespace fawkes {
                 return numerator - static_cast<long>(numerator / modulus) * modulus;
             }
 
+            long floor(const long value, const long multiple) {
+                return value - value % multiple;
+            }
+
             long double fractional(const long double value) {
                 return value - static_cast<long>(value);
             }
@@ -97,7 +101,7 @@ namespace fawkes {
                     return preceding;
                 }
                 const long double magnitude(std::abs(value));
-                const long double front(16.0L * (magnitude - floor(magnitude)));
+                const long double front(16.0L * (magnitude - std::floor(magnitude)));
                 const std::string accumulated(preceding + hex_digit(front));
                 return hex_string(accumulated, front, digits - 1L);
             }
