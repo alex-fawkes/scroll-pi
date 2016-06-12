@@ -16,6 +16,8 @@
 
 namespace scrollpi {
     namespace math {
+        const std::vector<long double> bin_powers_32(calculate_bin_powers(32L));
+
         long double pow(const long base, const long exponent) {
             const long double floating_base(base);
             const long double floating_exponent(exponent);
@@ -34,41 +36,47 @@ namespace scrollpi {
             return value - static_cast<long>(value);
         }
 
-        long next_bin_exponent(const long double value) {
+        long next_bin_exponent_32(const long double value) {
             long exponent(0L);
-            while (pow(2L, exponent) < value) {
+            while (bin_powers_32[exponent] < value) {
                 ++exponent;
             }
             return exponent + 1L;
         }
 
-        long double pow_hex_mod(long double accumulated,
-                                long double remaining,
-                                const long double exponent,
-                                const long double modulus,
-                                const long double bin_exponent) {
-            if (bin_exponent < 0) {
-                return accumulated;
+        std::vector<long double> calculate_bin_powers(const long count) {
+            std::vector<long double> powers;
+            for (long i(0); i < count; ++i) {
+                powers.push_back(math::pow(2, i));
             }
-
-            const long double bin_power(std::pow(2.0L, bin_exponent));
-            if (remaining >= bin_power) {
-                accumulated = mod(16.0L * accumulated, modulus);
-                remaining -= bin_power;
-            }
-            if (std::pow(2.0L, bin_exponent - 1) >= 1.0L) {
-                accumulated = mod(mod(accumulated * accumulated, modulus), modulus);
-            }
-
-            return pow_hex_mod(accumulated, remaining, exponent, modulus, bin_exponent - 1);
+            return powers;
         }
 
         long double pow_hex_mod(const long double exponent, const long double modulus) {
             if (near_equal(modulus, 1.0L)) {
                 return 0.0L;
             }
-            const long bin_exponent(next_bin_exponent(exponent));
-            return pow_hex_mod(1.0L, exponent, exponent, modulus, bin_exponent);
+            const long bin_exponent(next_bin_exponent_32(exponent));
+            return pow_hex_mod(1.0L, exponent, modulus, bin_exponent);
+        }
+
+        long double pow_hex_mod(long double accumulated,
+                                long double remaining,
+                                const long double modulus,
+                                long double bin_exponent) {
+            long double bin_power(std::pow(2.0L, bin_exponent));
+            while (bin_exponent >= 0.0L) {
+                if (remaining >= bin_power) {
+                    accumulated = mod(16.0L * accumulated, modulus);
+                    remaining -= bin_power;
+                }
+                bin_power *= 0.5L;
+                if (bin_power >= 1.0L) {
+                    accumulated = mod(mod(accumulated * accumulated, modulus), modulus);
+                }
+                bin_exponent -= 1.0L;
+            }
+            return accumulated;
         }
 
         /// Check if two long double values are effectively equal.

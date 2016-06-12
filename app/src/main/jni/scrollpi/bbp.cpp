@@ -16,15 +16,14 @@
 /// Implementation of BBP spigot algorithm derived from work by David H. Bailey:
 /// @see http://www.experimentalmath.info/bbp-codes/piqpr8.c
 ///
-/// This logic has not been optimized in the slightest and runs very slowly.
-/// Benchmarked at 1 million digits in 15 seconds on an Intel i5-3450S.
+/// This logic is minimally optimized and runs slowly. Calculates 8 digits at
+/// the millionths place in 25 seconds on an Intel i5-3450S in the emulator.
 
 #include "bbp.hpp"
 
 #include "math.hpp"
 
 #include <sstream>
-#include <vector>
 
 namespace scrollpi {
     namespace bbp {
@@ -69,40 +68,26 @@ namespace scrollpi {
         long double series_requested(const long index, const long m) {
             long double accumulated(0.0L);
             for (long k(0L); k < index; ++k) {
-                accumulated = series_requested(accumulated, index, m, k);
+                const long double denominator(8L * k + m);
+                const long double numerator(math::pow_hex_mod(index - k, denominator));
+                accumulated = math::fractional(accumulated + numerator / denominator);
             }
             return accumulated;
         }
 
-        long double series_requested(const long double accumulated,
-                                     const long index,
-                                     const long m,
-                                     const long k) {
-            const long double denominator(8L * k + m);
-            const long double numerator(math::pow_hex_mod(index - k, denominator));
-            return math::fractional(accumulated + numerator / denominator);
-        }
-
-        long double series_additional(const long double accumulated,
+        long double series_additional(long double accumulated,
                                       const long index,
                                       const long m) {
-            return series_additional(accumulated, index, m, index);
-        }
-
-        long double series_additional(const long double accumulated,
-                                      const long index,
-                                      const long m,
-                                      const long k) {
             static const long double additional(100L);
-            if (k > index + additional) {
-                return accumulated;
+            for (long k(index); k < index + additional + 1; ++k) {
+                const long double exponent(index - k);
+                const long double term(std::pow(16.0L, exponent) / (8L * k + m));
+                if (term < math::max_absolute_delta<long double>()) {
+                    return accumulated;
+                }
+                accumulated = math::fractional(accumulated + term);
             }
-            const long double exponent(index - k);
-            const long double term(std::pow(16.0L, exponent) / (8L * k + m));
-            if (term < std::numeric_limits<long double>::epsilon()) {
-                return accumulated;
-            }
-            return series_additional(math::fractional(accumulated + term), index, m, k + 1);
+            return accumulated;
         }
 
         static void trim_left(std::string& string, const long count) {

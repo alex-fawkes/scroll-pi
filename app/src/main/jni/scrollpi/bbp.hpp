@@ -35,20 +35,10 @@ namespace scrollpi {
         /// Calculate steps of the series necessary for the requested number of digits.
         long double series_requested(const long index, const long m);
 
-        long double series_requested(const long double accumulated,
-                                     const long index,
-                                     const long m,
-                                     const long k);
-
         /// Calculate additional steps of the series to ensure accuracy.
-        long double series_additional(const long double accumulated,
+        long double series_additional(long double accumulated,
                                       const long index,
                                       const long m);
-
-        long double series_additional(const long double accumulated,
-                                      const long index,
-                                      const long m,
-                                      const long k);
     }
 }
 
