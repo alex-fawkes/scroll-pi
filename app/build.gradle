@@ -6,7 +6,7 @@ model {
         buildToolsVersion '23.0.3'
 
         defaultConfig {
-            applicationId 'com.gmail.fawkes.alex.scrollpi'
+            applicationId 'com.gmail.pi.scroll'
             minSdkVersion.apiLevel 15
             targetSdkVersion.apiLevel 23
             versionCode 1
@@ -14,7 +14,7 @@ model {
         }
 
         ndk {
-            moduleName 'fawkes'
+            moduleName 'scrollpi'
             toolchain = 'clang'
             CFlags.addAll(['-Wall'])
             stl 'stlport_static'

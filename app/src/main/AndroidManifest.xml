@@ -17,7 +17,7 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
-          package="com.gmail.fawkes.alex.scrollpi">
+          package="com.gmail.pi.scroll">
 
     <application
         android:allowBackup="false"
@@ -26,7 +26,7 @@
         android:supportsRtl="true"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".ScrollPiActivity"
+            android:name="com.gmail.pi.scroll.ScrollPiActivity"
             android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
