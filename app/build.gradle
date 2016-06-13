@@ -9,8 +9,8 @@ model {
             applicationId 'com.gmail.pi.scroll'
             minSdkVersion.apiLevel 15
             targetSdkVersion.apiLevel 23
-            versionCode 4
-            versionName '1.0.3'
+            versionCode 5
+            versionName '1.1.0'
         }
 
         ndk {
