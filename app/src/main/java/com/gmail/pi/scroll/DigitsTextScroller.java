@@ -18,18 +18,15 @@ package com.gmail.pi.scroll;
 
 import android.widget.TextView;
 
-class AppendTextView implements Runnable {
-    private static final int TEXT_LENGTH_LIMIT = 2000;
+class DigitsTextScroller {
+    private static final int TEXT_LENGTH_LIMIT = 3000;
     private final TextView view;
-    private final String text;
 
-    public AppendTextView(final TextView view, final String text) {
+    public DigitsTextScroller(final TextView view) {
         this.view = view;
-        this.text = text;
     }
 
-    @Override
-    public void run() {
+    public void scroll(final String text) {
         view.append(text);
 
         if (isTooLong()) {

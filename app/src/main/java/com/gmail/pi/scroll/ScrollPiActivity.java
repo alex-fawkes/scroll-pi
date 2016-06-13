@@ -18,69 +18,46 @@ package com.gmail.pi.scroll;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.View;
+import android.os.Handler;
+import android.os.Message;
 import android.widget.TextView;
 
-import com.gmail.pi.scroll.math.NativeBbp;
-
 public class ScrollPiActivity extends Activity {
-    private StringBuilder buffer = new StringBuilder();
-    private long lastUpdateTimeMillis;
-    private int digitsDisplayed;
-
     @Override
     protected void onCreate(final Bundle state) {
         super.onCreate(state);
         setContentView(R.layout.activity_scroll_pi);
-        new Thread(new Loop()).start();
+        new Thread(new CalculatePiLoop(createHandler())).start();
     }
 
-    private void displayPiDigits() {
-        View view = findViewById(R.id.textView);
-        if (view instanceof TextView) {
-            buffer.append(calculateNextPiDigits());
-            if (isUpdateTime()) {
-                lastUpdateTimeMillis = System.currentTimeMillis();
-                view.post(new AppendTextView((TextView) view, flushBuffer()));
+    private void displayDigits(String digits) {
+        final TextView view = (TextView) findViewById(R.id.digitsScrollText);
+        if (view == null) {
+            return;
+        }
+        new DigitsTextScroller(view).scroll(digits);
+    }
+
+    private void displayDigitsCount(long count) {
+        final TextView view = (TextView) findViewById(R.id.digitsCountText);
+        if (view == null) {
+            return;
+        }
+        view.setText(String.valueOf(count));
+    }
+
+    private Handler createHandler() {
+        return new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(Message message) {
+                final NewDigitsEvent event = NewDigitsEvent.tryParse(message);
+                if (event != null) {
+                    displayDigits(event.digits);
+                    displayDigitsCount(event.digitsCalculated);
+                    return true;
+                }
+                return false;
             }
-        }
-    }
-
-    private String calculateNextPiDigits() {
-        final int index = digitsDisplayed;
-        final int digits = 16;
-        digitsDisplayed += digits;
-
-        final String text = NativeBbp.calculateHexDigitsFrom(index, digits);
-        if (index == 0) {
-            return "0x" + text;
-        }
-        return text;
-    }
-
-    private boolean isUpdateTime() {
-        final long updateIntervalMillis = 250;
-        final long elapsed = System.currentTimeMillis() - lastUpdateTimeMillis;
-        return elapsed >= updateIntervalMillis;
-    }
-
-    private String flushBuffer() {
-        final String content = buffer.toString();
-        buffer.setLength(0);
-        return content;
-    }
-
-    private class Loop implements Runnable {
-        @Override
-        public void run() {
-            loop();
-        }
-
-        @SuppressWarnings("InfiniteLoopStatement") // threaded infinite pi calculation
-        private void loop() {
-            while (true) {
-                displayPiDigits();
-            }
-        }
+        });
     }
 }

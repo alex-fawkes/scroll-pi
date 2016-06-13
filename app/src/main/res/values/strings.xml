@@ -17,4 +17,6 @@
 
 <resources>
     <string name="app_name">scroll.pi</string>
+    <string name="label_digits">digits</string>
+    <string name="field_digits_count_zero">0</string>
 </resources>
